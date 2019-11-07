@@ -51,8 +51,12 @@ public class LoginCommand extends Command {
             forward = Path.PAGE_ADMIN;
         }
 
-        if (userRole == Role.MANAGER || userRole == Role.CUSTOMER) {
+        if (userRole == Role.MANAGER) {
             forward = Path.PAGE_LIST_TOURS;
+        }
+
+        if (userRole == Role.CUSTOMER) {
+            forward = Path.PAGE_USER;
         }
 
         session.setAttribute("user", user);

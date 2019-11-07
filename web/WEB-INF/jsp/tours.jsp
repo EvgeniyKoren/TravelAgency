@@ -6,8 +6,15 @@
 
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
+<%@ include file="/WEB-INF/jspf/header.jspf"%>
 <jsp:include page="/WEB-INF/jsp/allTours.jsp" />
-
+<c:if test="${empty user}">
+    <div>
+        <p>Only registered users can book a tour.</p>
+        <p>Please, <a href="login.jsp"><i>log in </i></a> or
+            <a href="controller?command=redirect&pageName=signIn"><i>sign in</i></a> </p>
+    </div>
+</c:if>
 <c:if test="${not empty user}">
     <c:choose>
 
@@ -97,5 +104,6 @@
        <a href="controller?command=logout">Logout</a>
    </div>
 </c:if>
+<%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </body>
 </html>
