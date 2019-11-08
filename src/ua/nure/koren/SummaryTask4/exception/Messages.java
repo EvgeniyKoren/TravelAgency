@@ -20,7 +20,7 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users";
 
-	public static final String ERR_CANNOT_OBTAIN_MENU_ITEMS_BY_ORDER = "Cannot obtain menu items by order";
+	public static final String ERR_CANNOT_OBTAIN_TOURS = "Cannot obtain tours";
 
 	public static final String ERR_CANNOT_OBTAIN_MENU_ITEMS_BY_IDENTIFIERS = "Cannot obtain menu items by its identifiers";
 

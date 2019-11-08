@@ -15,6 +15,7 @@ public class UserDao extends Dao {
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login=?";
     private static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     private static final String SQL_INSERT_NEW_USER = "INSERT INTO users VALUE(DEFAULT, ?, ?, ?, ?, false, 2)";
+    private static final String SQL_UPDATE_USER_STATUS = "UPDATE users SET status=?	WHERE login=?";
 
     private static final Logger LOG = Logger.getLogger(UserDao.class);
 
@@ -28,14 +29,11 @@ public class UserDao extends Dao {
         return instance;
     }
 
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
-    private PreparedStatement prst;
-
     public List<User> findAllUsers() throws DBException {
         List<User> users = new ArrayList<>();
-        connection = DBManager.getConnection();
+        Connection connection = DBManager.getConnection();
+        Statement statement = null;
+        ResultSet resultSet = null;
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(SQL_FIND_ALL_USERS);
@@ -55,11 +53,14 @@ public class UserDao extends Dao {
 
     public User getUser(String login) throws DBException {
         User user = null;
-        connection = DBManager.getConnection();
+        Connection connection = DBManager.getConnection();
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
         try {
-            prst = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
-            prst.setString(1, login);
-            resultSet = prst.executeQuery();
+            preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
+            int n = 1;
+            preparedStatement.setString(n, login);
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = extractUser(resultSet);
             }
@@ -68,28 +69,53 @@ public class UserDao extends Dao {
             rollback(connection);
             throw new DBException(Messages.ERR_CANNOT_OBTAIN_USER_BY_LOGIN, e);
         } finally {
-            close(connection, statement, resultSet);
+            close(connection, preparedStatement, resultSet);
         }
         LOG.trace("User is obtained --> " + user);
         return user;
     }
 
     public boolean insertUser(String firstName, String lastName, String login, String pass) throws DBException {
-        connection = DBManager.getConnection();
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
         int rowsNum = 0;
         try {
-            prst = connection.prepareStatement(SQL_INSERT_NEW_USER);
-            prst.setString(1, firstName);
-            prst.setString(2, lastName);
-            prst.setString(3, login);
-            prst.setString(4, pass);
-            rowsNum = prst.executeUpdate();
+            preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_USER);
+            int n = 1;
+            preparedStatement.setString(n++, firstName);
+            preparedStatement.setString(n++, lastName);
+            preparedStatement.setString(n++, login);
+            preparedStatement.setString(n, pass);
+            rowsNum = preparedStatement.executeUpdate();
             LOG.trace("Returned number of rows --> " + rowsNum);
             connection.commit();
         } catch (SQLException e) {
             throw new DBException(Messages.ERR_CANNOT_INSERT_USER, e);
         } finally {
-            close(prst);
+            close(preparedStatement);
+            close(connection);
+        }
+        boolean result = rowsNum > 0;
+        return result;
+    }
+
+    public boolean updateUserStatus(User user) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum = 0;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_STATUS);
+            int n = 1;
+            preparedStatement.setBoolean(n++, !user.isStatus());
+            preparedStatement.setString(n, user.getLogin());
+            rowsNum = preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_USER, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
         }
         boolean result = rowsNum > 0;
         return result;
@@ -97,6 +123,7 @@ public class UserDao extends Dao {
 
     private User extractUser(ResultSet rs) throws SQLException {
         User user = new User();
+        user.setId(rs.getInt("id"));
         user.setFirstName(rs.getString("first_name"));
         user.setLastName(rs.getString("last_name"));
         user.setLogin(rs.getString("login"));

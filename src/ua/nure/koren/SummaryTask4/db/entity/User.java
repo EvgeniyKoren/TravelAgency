@@ -4,6 +4,7 @@ public class User {
 
     private static final int CUSTOMER = 2;
 
+    private int id;
     private String firstName;
     private String lastName;
     private String login;
@@ -20,6 +21,14 @@ public class User {
         this.password = password;
         this.status = false;
         this.roleId = CUSTOMER;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

@@ -92,11 +92,21 @@
         ===========================================================================--%>
         <c:when test="${userRole.name == 'customer'}">
             <%--            order tour form--%>
-            <form action="controller" method="post">
-                <input type="hidden" name="command" value="order"/>
-                <input type="number" name="tourId" placeholder="Tour id"/>
-                <input type="submit" value="Booking...">
-            </form>
+            <c:choose>
+                <c:when test="${user.status == false}">
+                    <div id="form_container">
+                        <form action="controller" method="post">
+                            <input type="hidden" name="command" value="order"/>
+                            <input type="number" name="tourId" placeholder="Tour id"/>
+                            <input type="submit" value="Booking...">
+                        </form>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <p>You are banned! Banned user can't book a tour.</p>
+                </c:otherwise>
+            </c:choose>
+
         </c:when>
     </c:choose>
 

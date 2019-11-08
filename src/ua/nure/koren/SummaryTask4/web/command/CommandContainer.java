@@ -33,6 +33,7 @@ public class CommandContainer {
 
 		// admin commands
 		commands.put("modifyUser", new ModifyUserCommand());
+		commands.put("showUsers", new ShowUsersCommand());
 
 		// manager & admin commands
         commands.put("changeTour", new ChangeTourCommand());

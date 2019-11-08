@@ -12,7 +12,7 @@ public abstract class Dao {
 
     private static final Logger LOG = Logger.getLogger(Dao.class);
 
-    private void close(Connection con) {
+    void close(Connection con) {
         if (con != null) {
             try {
                 con.close();
