@@ -78,7 +78,7 @@ public class UserDao extends Dao {
     public boolean insertUser(String firstName, String lastName, String login, String pass) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
-        int rowsNum = 0;
+        int rowsNum;
         try {
             preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_USER);
             int n = 1;
@@ -95,14 +95,13 @@ public class UserDao extends Dao {
             close(preparedStatement);
             close(connection);
         }
-        boolean result = rowsNum > 0;
-        return result;
+        return rowsNum > 0;
     }
 
     public boolean updateUserStatus(User user) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
-        int rowsNum = 0;
+        int rowsNum;
         try {
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_STATUS);
             int n = 1;
@@ -117,8 +116,7 @@ public class UserDao extends Dao {
             close(preparedStatement);
             close(connection);
         }
-        boolean result = rowsNum > 0;
-        return result;
+        return rowsNum > 0;
     }
 
     private User extractUser(ResultSet rs) throws SQLException {

@@ -1,10 +1,13 @@
 package ua.nure.koren.SummaryTask4.db.entity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Container for search criteria to find {@link Tour} in DB.
  */
 public class TourFilter {
 
+    @NotNull
     private String type;
     private int price;
     private int peopleQuantity;

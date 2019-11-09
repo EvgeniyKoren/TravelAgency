@@ -13,11 +13,9 @@ import java.util.List;
 
 public class TourDao extends Dao {
 
-    //    private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours ORDER BY last_minute DESC";
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours WHERE 1=1 ";
-    private static final String SQL_FIND_TOUR_BY_TYPE = "SELECT * FROM tours WHERE type=?";
-    private static final String SQL_FIND_TOUR_BY_TYPE_AND_PRICE = "SELECT * FROM tours WHERE type=? AND price < ?";
-    public static final String ORDER_BY_LAST_MINUTE_DESC = " ORDER BY last_minute DESC";
+    private static final String SQL_FIND_TOUR_BY_ID = "SELECT * FROM tours WHERE id=?";
+    private static final String ORDER_BY_LAST_MINUTE_DESC = " ORDER BY last_minute DESC";
 
     private static final Logger LOG = Logger.getLogger(TourDao.class);
 
@@ -31,66 +29,27 @@ public class TourDao extends Dao {
         return instance;
     }
 
-//    private Statement statement;
-//    private ResultSet resultSet;
-//    private PreparedStatement preparedStatement;
-
-    public List<Tour> findAllTours() throws DBException {
-        List<Tour> tours = new ArrayList<>();
+    public Tour getTourById(int id) throws DBException {
+        Tour tour = null;
         Connection connection = DBManager.getConnection();
-        Statement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        int n = 1;
         try {
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(SQL_FIND_ALL_TOURS);
-            while (resultSet.next()) {
-                tours.add(extractTour(resultSet));
+            preparedStatement = connection.prepareStatement(SQL_FIND_TOUR_BY_ID);
+            preparedStatement.setInt(n, id);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                tour = extractTour(resultSet);
             }
         } catch (SQLException e) {
-            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USERS, e);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_TOUR, e);
         } finally {
-            close(connection, statement, resultSet);
+            close(connection, preparedStatement, resultSet);
         }
-        LOG.trace("Tours is obtained --> " + tours);
-        return tours;
+        LOG.trace("Tour is obtained --> " + tour);
+        return tour;
     }
-//
-//    public List<Tour> findAllTours(String type) throws DBException {
-//        List<Tour> tours;
-//        Connection connection = DBManager.getConnection();
-//        try {
-//            preparedStatement = connection.prepareStatement(SQL_FIND_TOUR_BY_TYPE);
-//            int n = 1;
-//            preparedStatement.setString(n, type);
-//            resultSet = preparedStatement.executeQuery();
-//            tours = extractAvailableTours(resultSet);
-//        } catch (SQLException e) {
-//            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USERS, e);
-//        } finally {
-//            close(connection, preparedStatement, resultSet);
-//        }
-//        LOG.trace("Tours is obtained --> " + tours);
-//        return tours;
-//    }
-
-//    public List<Tour> findAllTours(String type, int price) throws DBException {
-//        List<Tour> tours;
-//        Connection connection = DBManager.getConnection();
-//        try {
-//            preparedStatement = connection.prepareStatement(SQL_FIND_TOUR_BY_TYPE_AND_PRICE);
-//            int n = 1;
-//            preparedStatement.setString(n++, type);
-//            preparedStatement.setInt(n, price);
-//            resultSet = preparedStatement.executeQuery();
-//            tours = extractAvailableTours(resultSet);
-//        } catch (SQLException e) {
-//            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USERS, e);
-//        } finally {
-//            close(connection, preparedStatement, resultSet);
-//        }
-//        LOG.trace("Tours is obtained --> " + tours);
-//        return tours;
-//    }
 
     public List<Tour> findAllTours(TourFilter filter) throws DBException {
         List<Tour> tours = new ArrayList<>();
@@ -107,7 +66,7 @@ public class TourDao extends Dao {
                 tours.add(extractTour(resultSet));
             }
         } catch (SQLException e) {
-            throw new DBException(Messages.ERR_CANNOT_OBTAIN_USERS, e);
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_TOURS, e);
         } finally {
             close(connection, preparedStatement, resultSet);
         }
@@ -150,14 +109,6 @@ public class TourDao extends Dao {
         LOG.trace("Query is created --> " + query);
         return query;
     }
-
-//    private List<Tour> extractAvailableTours(ResultSet rs) throws SQLException {
-//        List<Tour> tours = new ArrayList<>();
-//        while (rs.next()) {
-//            tours.add(extractTour(rs));
-//        }
-//        return tours;
-//    }
 
     private Tour extractTour(ResultSet rs) throws SQLException {
         Tour tour = new Tour();

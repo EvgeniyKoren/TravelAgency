@@ -44,7 +44,7 @@
 <%--                        <option disabled selected>Select type</option>--%>
                         <option value="rest">Rest</option>
                         <option value="excursion">Excursion</option>
-                        <option value="shoping">Shopping</option>
+                        <option value="shopping">Shopping</option>
                     </select>
                 </p>
                 <input type="submit" value="Add">

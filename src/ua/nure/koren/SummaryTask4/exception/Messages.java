@@ -3,7 +3,7 @@ package ua.nure.koren.SummaryTask4.exception;
 /**
  * Holder for messages of exceptions.
  * 
- * @author Dmytro_Kolesnikov
+ * @author E.Koren
  *
  */
 public class Messages {
@@ -20,7 +20,11 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users";
 
+	public static final String ERR_CANNOT_OBTAIN_TOUR = "Cannot obtain tour";
+
 	public static final String ERR_CANNOT_OBTAIN_TOURS = "Cannot obtain tours";
+
+	public static final String ERR_CANNOT_ORDER = "Tour is not available";
 
 	public static final String ERR_CANNOT_OBTAIN_MENU_ITEMS_BY_IDENTIFIERS = "Cannot obtain menu items by its identifiers";
 
@@ -40,6 +44,8 @@ public class Messages {
 
 	public static final String ERR_CANNOT_INSERT_USER = "Cannot insert a user";
 
+	public static final String ERR_CANNOT_INSERT_ORDER = "Cannot insert an order";
+
 	public static final String ERR_CANNOT_CLOSE_CONNECTION = "Cannot close a connection";
 
 	public static final String ERR_CANNOT_CLOSE_RESULTSET = "Cannot close a result set";
@@ -47,5 +53,7 @@ public class Messages {
 	public static final String ERR_CANNOT_CLOSE_STATEMENT = "Cannot close a statement";
 
 	public static final String ERR_CANNOT_OBTAIN_DATA_SOURCE = "Cannot obtain the data source";
-	
+
+	public static final String ERR_NEGATIVE_PARAMETER = "Input data can't be negative";
+
 }

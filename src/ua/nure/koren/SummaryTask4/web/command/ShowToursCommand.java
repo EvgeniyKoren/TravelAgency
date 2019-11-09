@@ -10,7 +10,8 @@ import ua.nure.koren.SummaryTask4.exception.AppException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintValidator;
+import javax.validation.ValidatorFactory;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,27 +28,37 @@ public class ShowToursCommand extends Command {
 
         TourDao tourDao = TourDao.getInstance();
 
-//        String type = request.getParameter("type");
-//        LOG.trace("Request parameter: type --> " + type);
-//        int price = Integer.parseInt(request.getParameter("price"));
-//        LOG.trace("Request parameter: price --> " + price);
-//        int peopleQuantity = Integer.parseInt(request.getParameter("peopleQuantity"));
-//        LOG.trace("Request parameter: peopleQuantity --> " + peopleQuantity);
-//        int hotelType = Integer.parseInt(request.getParameter("hotelType"));
-//        LOG.trace("Request parameter: hotelType --> " + hotelType);
-//
-//        TourFilter tourFilter = new TourFilter();
-//        tourFilter.setType(type);
-//        tourFilter.setPrice(price);
-//        tourFilter.setPeopleQuantity(peopleQuantity);
-//        tourFilter.setHotelType(hotelType);
-//        LOG.trace("TourFilter object is created --> " + tourFilter);
+        String type = request.getParameter("type");
+        LOG.trace("Request parameter: type --> " + type);
+        String price = request.getParameter("price");
+        LOG.trace("Request parameter: price --> " + price);
+        String peopleQuantity = request.getParameter("peopleQuantity");
+        LOG.trace("Request parameter: peopleQuantity --> " + peopleQuantity);
+        String hotelType = request.getParameter("hotelType");
+        LOG.trace("Request parameter: hotelType --> " + hotelType);
 
-        List<Tour> tours = tourDao.findAllTours();
+        TourFilter tourFilter = new TourFilter();
+
+        if (type != null && !type.isEmpty()) {
+            tourFilter.setType(type);
+        }
+        if (price != null && !price.isEmpty()) {
+            int filterPrice = Integer.parseInt(price);
+            tourFilter.setPrice(filterPrice);
+        }
+        if (peopleQuantity != null && !peopleQuantity.isEmpty()) {
+            int filterPeopleQuantity = Integer.parseInt(peopleQuantity);
+            tourFilter.setPeopleQuantity(filterPeopleQuantity);
+        }
+        if (hotelType != null && !hotelType.isEmpty()) {
+            int filterHotelType = Integer.parseInt(hotelType);
+            tourFilter.setHotelType(filterHotelType);
+        }
+        LOG.trace("TourFilter object is created --> " + tourFilter);
+
+        List<Tour> tours = tourDao.findAllTours(tourFilter);
         LOG.trace("Found in DB: tourList --> " + tours);
 
-//        HttpSession session = request.getSession(false);
-//        session.setAttribute("allTours", tours);
         request.setAttribute("allTours", tours);
         LOG.trace("Set the request attribute: allTours --> " + tours);
 

@@ -2,9 +2,26 @@ package ua.nure.koren.SummaryTask4.db.entity;
 
 public class Order {
 
+    private int id;
     private int userId;
     private int tourId;
-    private boolean isPaid;
+    private boolean handled;
+
+    public Order() {}
+
+    public Order(int userId, int tourId) {
+        this.userId = userId;
+        this.tourId = tourId;
+        this.handled = false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getUserId() {
         return userId;
@@ -22,20 +39,21 @@ public class Order {
         this.tourId = tourId;
     }
 
-    public boolean isPaid() {
-        return isPaid;
+    public boolean isHandled() {
+        return handled;
     }
 
-    public void setPaid(boolean paid) {
-        isPaid = paid;
+    public void setHandled(boolean handled) {
+        this.handled = handled;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "userId=" + userId +
+                "id=" + id +
+                ", userId=" + userId +
                 ", tourId=" + tourId +
-                ", isPaid=" + isPaid +
+                ", handled=" + handled +
                 '}';
     }
 }

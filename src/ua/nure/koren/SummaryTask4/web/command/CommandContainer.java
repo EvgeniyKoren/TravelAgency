@@ -28,7 +28,6 @@ public class CommandContainer {
 		commands.put("showTours", new ShowToursCommand());
 
 		// client commands
-		commands.put("selectTour", new SelectTourCommand());
 		commands.put("order", new OrderCommand());
 
 		// admin commands
