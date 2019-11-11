@@ -14,6 +14,7 @@ public class PageContainer {
     static {
         pages.put("admin", Path.PAGE_ADMIN);
         pages.put("signIn", Path.PAGE_SIGN_IN);
+        pages.put("userPage", Path.PAGE_USER);
         pages.put("error", Path.PAGE_ERROR_PAGE);
 
         LOG.debug("Page container was successfully initialized");

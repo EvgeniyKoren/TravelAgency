@@ -53,7 +53,7 @@
     <div id="form_container">
         <form action="controller" method="post">
             <input type="hidden" name="command" value="modifyUser"/>
-            <input type="text" name="us erLogin" placeholder="user login"/>
+            <input type="text" name="userLogin" placeholder="user login"/>
             <input type="submit" value="change status">
         </form>
     </div>

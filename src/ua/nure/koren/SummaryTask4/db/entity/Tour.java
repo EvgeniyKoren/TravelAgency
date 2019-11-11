@@ -11,8 +11,8 @@ public class Tour {
     private String country;
     private String city;
     private String hotelName;
-    @NotNull
-    @Min(0)
+//    @NotNull
+//    @Min(0)
     private int price;
     private int peopleQuantity;
     private int duration;

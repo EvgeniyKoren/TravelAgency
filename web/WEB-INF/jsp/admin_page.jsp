@@ -9,6 +9,7 @@
     <ul>
         <li><a href="controller?command=showTours">Show tours</a></li>
         <li><a href="controller?command=showUsers">Show users</a></li>
+        <li><a href="controller?command=showOrders">Show orders</a></li>
     </ul>
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 </body>

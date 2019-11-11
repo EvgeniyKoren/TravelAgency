@@ -24,7 +24,6 @@ public class CommandContainer {
 		commands.put("logout", new LogoutCommand());
 		commands.put("redirect", new RedirectCommand());
 		commands.put("noCommand", new NoCommand());
-		commands.put("addUser", new AddUserCommand());
 		commands.put("showTours", new ShowToursCommand());
 
 		// client commands
@@ -38,6 +37,7 @@ public class CommandContainer {
         commands.put("changeTour", new ChangeTourCommand());
         commands.put("addTour", new AddTourCommand());
         commands.put("deleteTour", new DeleteTourCommand());
+        commands.put("showOrders", new ShowOrdersCommand());
 		
 		LOG.debug("Command container was successfully initialized");
 		LOG.trace("Number of commands --> " + commands.size());

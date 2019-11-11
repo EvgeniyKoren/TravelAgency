@@ -21,17 +21,16 @@ This is the user menu.
 This way we define the ADMIN MENU. 
 ===========================================================================--%> 
 		<c:when test="${userRole.name == 'admin' }">
-			<a href="${pageContext.request.contextPath}/WEB-INF/jsp/admin_page.jsp">admin page</a>
-<%--			<a href="controller?command=listOrders">All orders</a>--%>
+			<a href="controller?command=redirect&pageName=admin">Your account</a>
 		</c:when>
 
 		
 <%--=========================================================================== 
 This way we define the USER MENU.
 ===========================================================================--%> 
-		<c:when test="${userRole.name == 'manager'}">
-			<a href="controller?command=listMenu">Menu</a> &nbsp;
-		</c:when>
+		<c:otherwise>
+			<a href="controller?command=redirect&pageName=userPage">Your account</a>
+		</c:otherwise>
 	</c:choose>
 	
 <%--=========================================================================== 

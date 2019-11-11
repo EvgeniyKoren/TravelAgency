@@ -16,9 +16,10 @@ public final class Path {
   public static final String PAGE_SIGN_IN = "/WEB-INF/jsp/signIn.jsp";
   public static final String PAGE_USER = "/WEB-INF/jsp/userPage.jsp";
   public static final String PAGE_LIST_USERS = "/WEB-INF/jsp/allUsers.jsp";
+  public static final String PAGE_LIST_ORDERS = "/WEB-INF/jsp/allOrders.jsp";
 
   // commands
   public static final String COMMAND_SHOW_USERS = "/controller?command=showUsers";
-  public static final String COMMAND_LIST_MENU = "/controller?command=listMenu";
+  public static final String COMMAND_SHOW_TOURS = "/controller?command=showTours";
 
 }

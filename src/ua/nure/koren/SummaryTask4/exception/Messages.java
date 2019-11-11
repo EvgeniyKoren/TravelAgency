@@ -8,7 +8,7 @@ package ua.nure.koren.SummaryTask4.exception;
  */
 public class Messages {
 
-	private Messages() {
+    private Messages() {
 		// no op
 	}
 	
@@ -42,9 +42,15 @@ public class Messages {
 
 	public static final String ERR_CANNOT_UPDATE_USER = "Cannot update a user";
 
+	public static final String ERR_CANNOT_UPDATE_TOUR_TO_LAST_MINUTE = "Cannot update last minute status of tour";
+
+	public static final String ERR_CANNOT_UPDATE_TOUR_TYPE = "Cannot update type of the tour";
+
 	public static final String ERR_CANNOT_INSERT_USER = "Cannot insert a user";
 
 	public static final String ERR_CANNOT_INSERT_ORDER = "Cannot insert an order";
+
+	public static final String ERR_CANNOT_INSERT_TOUR = "Cannot insert a tour";
 
 	public static final String ERR_CANNOT_CLOSE_CONNECTION = "Cannot close a connection";
 
@@ -54,6 +60,10 @@ public class Messages {
 
 	public static final String ERR_CANNOT_OBTAIN_DATA_SOURCE = "Cannot obtain the data source";
 
+	public static final String ERR_EMPTY_REQUEST = "All parameters can't be empty";
+
 	public static final String ERR_NEGATIVE_PARAMETER = "Input data can't be negative";
+
+	public static final String ERR_CANNOT_DELETE_TOUR = "Cannot delete a tour";
 
 }

@@ -1,13 +1,12 @@
 package ua.nure.koren.SummaryTask4.web.command;
 
 import org.apache.log4j.Logger;
-import ua.nure.koren.SummaryTask4.Path;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * View settings command.
+ * Redirect command.
  * 
  * @author E.Koren
  * 

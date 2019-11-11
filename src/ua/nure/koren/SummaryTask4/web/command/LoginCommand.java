@@ -52,7 +52,7 @@ public class LoginCommand extends Command {
         }
 
         if (userRole == Role.MANAGER) {
-            forward = Path.PAGE_LIST_TOURS;
+            forward = Path.PAGE_USER;
         }
 
         if (userRole == Role.CUSTOMER) {

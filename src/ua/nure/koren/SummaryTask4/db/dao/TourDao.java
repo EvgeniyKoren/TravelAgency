@@ -16,6 +16,10 @@ public class TourDao extends Dao {
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours WHERE 1=1 ";
     private static final String SQL_FIND_TOUR_BY_ID = "SELECT * FROM tours WHERE id=?";
     private static final String ORDER_BY_LAST_MINUTE_DESC = " ORDER BY last_minute DESC";
+    private static final String SQL_UPDATE_LAST_MINUTE = "UPDATE tours SET last_minute=? WHERE id=?";
+    private static final String SQL_UPDATE_TOUR_TYPE = "UPDATE tours SET status=? WHERE id=?";
+    private static final String SQL_INSERT_NEW_TOUR = "INSERT INTO tours VALUE(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_DELETE_TOUR = "DELETE FROM tours WHERE id = ?";
 
     private static final Logger LOG = Logger.getLogger(TourDao.class);
 
@@ -70,8 +74,100 @@ public class TourDao extends Dao {
         } finally {
             close(connection, preparedStatement, resultSet);
         }
-        LOG.trace("Tours is obtained --> " + tours);
+        LOG.trace("Tours are obtained --> " + tours);
         return tours;
+    }
+
+    public boolean makeLastMinute(Tour tour) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        int n = 1;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_LAST_MINUTE);
+            preparedStatement.setBoolean(n++, !tour.isLastMinute());
+            preparedStatement.setInt(n, tour.getId());
+            rowsNum = preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_TOUR_TO_LAST_MINUTE, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
+    }
+
+    public boolean changeTourStatus(Tour tour, String status) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        int n = 1;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_TOUR_TYPE);
+            preparedStatement.setString(n++, status);
+            preparedStatement.setInt(n, tour.getId());
+            rowsNum = preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_TOUR_TYPE, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
+    }
+    
+    public boolean insertTour(Tour tour) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        int n = 1;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_INSERT_NEW_TOUR);
+            preparedStatement.setString(n++, tour.getCountry());
+            preparedStatement.setString(n++, tour.getCity());
+            preparedStatement.setString(n++, tour.getHotelName());
+            preparedStatement.setInt(n++, tour.getHotelType());
+            preparedStatement.setInt(n++, tour.getDuration());
+            preparedStatement.setInt(n++, tour.getPeopleQuantity());
+            preparedStatement.setInt(n++, tour.getPrice());
+            preparedStatement.setBoolean(n++, tour.isLastMinute());
+            preparedStatement.setString(n++, tour.getType());
+            preparedStatement.setString(n, tour.getStatus());
+            rowsNum = preparedStatement.executeUpdate();
+            LOG.trace("Returned number of rows --> " + rowsNum);
+            connection.commit();
+        } catch (SQLException e) {
+            throw new DBException(Messages.ERR_CANNOT_INSERT_TOUR, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
+    }
+
+    public boolean deleteTourById(int id) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        int n = 1;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_DELETE_TOUR);
+            preparedStatement.setInt(n, id);
+            rowsNum = preparedStatement.executeUpdate();
+            LOG.trace("Returned number of rows --> " + rowsNum);
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_DELETE_TOUR, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
     }
 
     private void populateStatement(PreparedStatement preparedStatement, TourFilter filter) throws SQLException {
