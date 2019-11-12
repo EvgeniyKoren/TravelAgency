@@ -33,9 +33,9 @@
             </div>
 <%--            add tour form--%>
             <div id="form_container">
-                <p>Add tour:</p>
+                <p>Add tour or update an existing one</p>
                 <form action="controller" method="post">
-                    <input type="hidden" name="command" value="addTour"/><br>
+                    <input type="hidden" name="command" value="addOrUpdateTour"/><br>
                     <input type="text" name="country" placeholder="country"/><br>
                     <input type="text" name="city" placeholder="city"/><br>
                     <input type="text" name="hotelName" placeholder="hotel's name"/><br>
@@ -43,10 +43,11 @@
                     <input type="number" name="duration" placeholder="tour's duration"/><br>
                     <input type="number" name="peopleQuantity" placeholder="people quantity" value="true"/><br>
                     <input type="number" name="price" placeholder="price"/><br>
+                    <input type="number" name="sale" placeholder="sale"/><br>
                     <span>Is last Minute</span><input type="checkbox" name="lastMinute" value="true"/><br>
                     <p>
                         <select name="type" size="1">
-                                <%--                        <option disabled selected>Select type</option>--%>
+                            <option disabled selected>Select type</option>
                             <option value="rest">Rest</option>
                             <option value="excursion">Excursion</option>
                             <option value="shopping">Shopping</option>
@@ -62,24 +63,8 @@
                         </select>
                     </p>
                     <input type="submit" value="Add">
-                </form>
-            </div>
-            <%--            change tour form--%>
-            <div id="form_container">
-                <p>Change information about tour:</p>
-                <form action="controller" method="post">
-                    <input type="hidden" name="command" value="changeTour"/>
                     <input type="number" name="tourId" placeholder="Tour id"/>
-                    <span>Is last Minute</span><input type="checkbox" name="lastMinute" value="true"/>
-                    <span>Tour status: </span>
-                    <select name="status" size="1">
-                        <option disabled selected>Status</option>
-                        <option value="free">Free</option>
-                        <option value="registered">Registered</option>
-                        <option value="paid">Paid</option>
-                        <option value="canceled">Canceled</option>
-                    </select>
-                    <input type="submit" value="Change info">
+                    <input type="submit" value="Update">
                 </form>
             </div>
         </c:when>
@@ -94,6 +79,7 @@
                 <p>Change information about tour:</p>
                 <input type="hidden" name="command" value="changeTour"/>
                 <input type="number" name="tourId" placeholder="Tour id"/>
+                <input type="number" name="sale" placeholder="sale"/>
                 <span>Is last Minute</span><input type="checkbox" name="lastMinute" value="true"/>
                 <span>Tour status: </span>
                 <select name="status" size="1">

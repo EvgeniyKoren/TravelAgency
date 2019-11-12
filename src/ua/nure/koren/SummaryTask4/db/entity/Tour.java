@@ -1,9 +1,5 @@
 package ua.nure.koren.SummaryTask4.db.entity;
 
-import ua.nure.koren.SummaryTask4.db.Status;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 public class Tour {
 
     private int id;
@@ -11,14 +7,13 @@ public class Tour {
     private String country;
     private String city;
     private String hotelName;
-//    @NotNull
-//    @Min(0)
     private int price;
     private int peopleQuantity;
     private int duration;
     private int hotelType;
     private boolean lastMinute;
     private String status;
+    private int sale;
 
     public int getId() {
         return id;
@@ -108,6 +103,14 @@ public class Tour {
         this.status = status;
     }
 
+    public int getSale() {
+        return sale;
+    }
+
+    public void setSale(int sale) {
+        this.sale = sale;
+    }
+
     @Override
     public String toString() {
         return "Tour{" +
@@ -121,6 +124,7 @@ public class Tour {
                 ", typeOfHotel=" + hotelType +
                 ", lastMinute=" + lastMinute +
                 ", status=" + status +
+                ", sale=" + sale +
                 '}';
     }
 }

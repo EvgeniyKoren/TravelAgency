@@ -5,17 +5,18 @@ import ua.nure.koren.SummaryTask4.Path;
 import ua.nure.koren.SummaryTask4.db.dao.TourDao;
 import ua.nure.koren.SummaryTask4.db.entity.Tour;
 import ua.nure.koren.SummaryTask4.exception.AppException;
+import ua.nure.koren.SummaryTask4.exception.Messages;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddTourCommand extends Command {
+public class AddOrUpdateTourCommand extends Command {
 
     private static final long serialVersionUID = -3071536593627692987L;
 
-    private static final Logger LOG = Logger.getLogger(AddTourCommand.class);
+    private static final Logger LOG = Logger.getLogger(AddOrUpdateTourCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
@@ -23,6 +24,7 @@ public class AddTourCommand extends Command {
         LOG.debug("Command starts");
 
         Tour tour = new Tour();
+        TourDao tourDao = TourDao.getInstance();
 
         String country = request.getParameter("country");
         LOG.trace("Request parameter: country --> " + country);
@@ -88,11 +90,35 @@ public class AddTourCommand extends Command {
             tour.setStatus(status);
         }
 
-        TourDao tourDao = TourDao.getInstance();
-        boolean success = tourDao.insertTour(tour);
-        if (success) {
-            LOG.trace("New tour is inserted --> " + tour);
-            return Path.COMMAND_SHOW_TOURS;
+        String saleForTour = request.getParameter("sale");
+        LOG.trace("Request parameter: sale --> " + saleForTour);
+        if (saleForTour != null && !saleForTour.isEmpty()) {
+            int sale = Integer.parseInt(saleForTour);
+            tour.setSale(sale);
+        }
+
+        String tourId = request.getParameter("tourId");
+        LOG.trace("Request parameter: tourId --> " + tourId);
+
+        if (tourId == null || tourId.isEmpty()) {
+            boolean success = tourDao.insertTour(tour);
+            if (success) {
+                LOG.trace("New tour is inserted --> " + tour);
+                LOG.debug("Command finished");
+                return Path.COMMAND_SHOW_TOURS;
+            }
+        } else {
+            int id = Integer.parseInt(tourId);
+            if (id <= 0) {
+                throw new AppException(Messages.ERR_NEGATIVE_PARAMETER);
+            }
+            tour.setId(id);
+            boolean success = tourDao.updateTour(tour);
+            if (success) {
+                LOG.trace("Tour № " + id + " is updated --> ");
+                LOG.debug("Command finished");
+                return Path.COMMAND_SHOW_TOURS;
+            }
         }
 
         LOG.debug("Command finished");

@@ -54,7 +54,20 @@ public class ChangeTourCommand extends Command {
             }
         }
 
-        if (requestLastMinute == null && status == null) {
+        String saleForTour = request.getParameter("sale");
+        LOG.trace("Request parameter: sale --> " + saleForTour);
+        if (saleForTour != null && !saleForTour.isEmpty()) {
+            int sale = Integer.parseInt(saleForTour);
+            if (sale < 0) {
+                throw new AppException(Messages.ERR_NEGATIVE_PARAMETER);
+            }
+            boolean success = tourDao.setSale(tour, sale);
+            if (success) {
+                LOG.trace("Tour sale has been set to --> " + sale);
+            }
+        }
+
+        if (requestLastMinute == null && status == null && saleForTour == null) {
             throw new AppException(Messages.ERR_EMPTY_REQUEST);
         }
 

@@ -13,9 +13,12 @@ CREATE TABLE `roles`
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO roles VALUES(0, 'admin');
-INSERT INTO roles VALUES(1, 'manager');
-INSERT INTO roles VALUES(2, 'customer');
+INSERT INTO roles
+VALUES (0, 'admin');
+INSERT INTO roles
+VALUES (1, 'manager');
+INSERT INTO roles
+VALUES (2, 'customer');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`
@@ -37,11 +40,12 @@ CREATE TABLE `users`
             ON UPDATE RESTRICT
 );
 
-INSERT INTO users VALUES(DEFAULT, 'Peter', 'Petrov', 'admin', 'admin', 0, 0),
-                        (DEFAULT, 'Georg', 'Georgeson', 'manager', 'manager', 0, 1),
-                        (DEFAULT, 'Georg2', 'Anderson', 'jora', '432', 0, 2),
-                        (DEFAULT, 'Georg3', 'Peterson', 'jor3', '432', 0, 2),
-                        (DEFAULT, 'Georg4', 'Jopa', 'jor4', '432', 0, 2);
+INSERT INTO users
+VALUES (DEFAULT, 'Peter', 'Petrov', 'admin', 'admin', 0, 0),
+       (DEFAULT, 'Georg', 'Georgeson', 'manager', 'manager', 0, 1),
+       (DEFAULT, 'Georg2', 'Anderson', 'jora', '432', 0, 2),
+       (DEFAULT, 'Georg3', 'Peterson', 'jor3', '432', 0, 2),
+       (DEFAULT, 'Georg4', 'Jopa', 'jor4', '432', 0, 2);
 
 DROP TABLE IF EXISTS `tours`;
 CREATE TABLE `tours`
@@ -57,17 +61,19 @@ CREATE TABLE `tours`
     `last_minute`     TINYINT(1)                                     NOT NULL,
     `type`            VARCHAR(10)                                    NOT NULL,
     `status`          ENUM ('free','registered', 'paid', 'canceled') NOT NULL,
+    `sale`            INT DEFAULT 0,
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO tours VALUES (DEFAULT, 'EGYPT', 'Sharm El Sheikh', 'Fortune Sharm', 3, 9, 2, 12950, 1, 'rest', 'free'),
-                         (DEFAULT, 'EGYPT', 'Sharm El Sheikh', 'Fortune Sharm', 4, 7, 2, 11050, 1, 'rest', 'free'),
-                         (DEFAULT, 'Turkey', 'Belek', 'Medusa Hotel', 5, 10, 2, 10100, 1, 'rest', 'free'),
-                         (DEFAULT, 'Turkey', 'Kemer', 'Medusa Hotel', 4, 8, 2, 9850, 0, 'rest', 'free'),
-                         (DEFAULT, 'Кипр', 'Пафос', 'Агапинор Hotel', 3, 6, 2, 10170, 0, 'rest', 'free'),
-                         (DEFAULT, 'Кипр', 'Пафос', 'Агапинор Hotel', 3, 6, 2, 10170, 0, 'rest', 'free'),
-                         (DEFAULT, 'Польша', 'Краков', 'Krakov', 3, 2, 1, 4756, 0, 'excursion', 'free'),
-                         (DEFAULT, 'Italy', 'Milan', 'Hotel', 4, 2, 1, 8000, 1, 'shopping', 'free');
+INSERT INTO tours
+VALUES (DEFAULT, 'EGYPT', 'Sharm El Sheikh', 'Fortune Sharm', 3, 9, 2, 12950, 1, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'EGYPT', 'Sharm El Sheikh', 'Fortune Sharm', 4, 7, 2, 11050, 1, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'Turkey', 'Belek', 'Medusa Hotel', 5, 10, 2, 10100, 1, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'Turkey', 'Kemer', 'Medusa Hotel', 4, 8, 2, 9850, 0, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'Кипр', 'Пафос', 'Агапинор Hotel', 3, 6, 2, 10170, 0, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'Кипр', 'Пафос', 'Агапинор Hotel', 3, 6, 2, 10170, 0, 'rest', 'free', DEFAULT),
+       (DEFAULT, 'Польша', 'Краков', 'Krakov', 3, 2, 1, 4756, 0, 'excursion', 'free', DEFAULT),
+       (DEFAULT, 'Italy', 'Milan', 'Hotel', 4, 2, 1, 8000, 1, 'shopping', 'free', DEFAULT);
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders`

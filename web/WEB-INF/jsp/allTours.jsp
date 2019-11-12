@@ -20,6 +20,7 @@
                 <td>Is Last Minute</td>
                 <td>Type of tour</td>
                 <td>Status</td>
+                <td>Sale, %</td>
             </tr>
             </thead>
 
@@ -36,6 +37,15 @@
                     <td>${item.lastMinute}</td>
                     <td>${item.type}</td>
                     <td>${item.status}</td>
+                    <c:choose>
+                        <c:when test="${item.sale != 0}">
+                            <b><c:set var="sale" value="${item.sale}"/></b>
+                        </c:when>
+                        <c:otherwise>
+                            <b><c:set var="sale" value=""/></b>
+                        </c:otherwise>
+                    </c:choose>
+                    <td>${sale}</td>
                 </tr>
             </c:forEach>
         </table>

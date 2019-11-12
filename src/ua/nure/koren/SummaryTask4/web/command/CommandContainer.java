@@ -32,11 +32,11 @@ public class CommandContainer {
 		// admin commands
 		commands.put("modifyUser", new ModifyUserCommand());
 		commands.put("showUsers", new ShowUsersCommand());
+        commands.put("addOrUpdateTour", new AddOrUpdateTourCommand());
+        commands.put("deleteTour", new DeleteTourCommand());
 
 		// manager & admin commands
         commands.put("changeTour", new ChangeTourCommand());
-        commands.put("addTour", new AddTourCommand());
-        commands.put("deleteTour", new DeleteTourCommand());
         commands.put("showOrders", new ShowOrdersCommand());
 		
 		LOG.debug("Command container was successfully initialized");

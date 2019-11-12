@@ -18,8 +18,10 @@ public class TourDao extends Dao {
     private static final String ORDER_BY_LAST_MINUTE_DESC = " ORDER BY last_minute DESC";
     private static final String SQL_UPDATE_LAST_MINUTE = "UPDATE tours SET last_minute=? WHERE id=?";
     private static final String SQL_UPDATE_TOUR_TYPE = "UPDATE tours SET status=? WHERE id=?";
+    private static final String SQL_UPDATE_TOUR_SALE = "UPDATE tours SET sale=? WHERE id=?";
     private static final String SQL_INSERT_NEW_TOUR = "INSERT INTO tours VALUE(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_DELETE_TOUR = "DELETE FROM tours WHERE id = ?";
+    private static final String SQL_DELETE_TOUR = "DELETE FROM tours WHERE id=?";
+    private static final String SQL_UPDATE_TOUR = "UPDATE tours SET ";
 
     private static final Logger LOG = Logger.getLogger(TourDao.class);
 
@@ -119,6 +121,27 @@ public class TourDao extends Dao {
         }
         return rowsNum > 0;
     }
+
+    public boolean setSale(Tour tour, int sale) throws DBException {
+        Connection connection = DBManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        int n = 1;
+        try {
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_TOUR_SALE);
+            preparedStatement.setInt(n++, sale);
+            preparedStatement.setInt(n, tour.getId());
+            rowsNum = preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_TOUR_SALE, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
+    }
     
     public boolean insertTour(Tour tour) throws DBException {
         Connection connection = DBManager.getConnection();
@@ -136,7 +159,8 @@ public class TourDao extends Dao {
             preparedStatement.setInt(n++, tour.getPrice());
             preparedStatement.setBoolean(n++, tour.isLastMinute());
             preparedStatement.setString(n++, tour.getType());
-            preparedStatement.setString(n, tour.getStatus());
+            preparedStatement.setString(n++, tour.getStatus());
+            preparedStatement.setInt(n, tour.getSale());
             rowsNum = preparedStatement.executeUpdate();
             LOG.trace("Returned number of rows --> " + rowsNum);
             connection.commit();
@@ -170,6 +194,27 @@ public class TourDao extends Dao {
         return rowsNum > 0;
     }
 
+    public boolean updateTour(Tour tour) throws DBException {
+        Connection connection = DBManager.getConnection();
+        String sqlQuery = queryByTour(tour);
+        PreparedStatement preparedStatement = null;
+        int rowsNum;
+        try {
+            preparedStatement = connection.prepareStatement(sqlQuery);
+            populateStatementByTour(preparedStatement, tour);
+            rowsNum = preparedStatement.executeUpdate();
+            LOG.trace("Returned number of rows --> " + rowsNum);
+            connection.commit();
+        } catch (SQLException e) {
+            rollback(connection);
+            throw new DBException(Messages.ERR_CANNOT_UPDATE_TOUR, e);
+        } finally {
+            close(preparedStatement);
+            close(connection);
+        }
+        return rowsNum > 0;
+    }
+
     private void populateStatement(PreparedStatement preparedStatement, TourFilter filter) throws SQLException {
         int n = 1;
         if (filter.getType() != null) {
@@ -184,6 +229,44 @@ public class TourDao extends Dao {
         if (filter.getHotelType() != 0) {
             preparedStatement.setInt(n++, filter.getHotelType());
         }
+    }
+
+    private void populateStatementByTour(PreparedStatement preparedStatement, Tour tour) throws SQLException {
+        int n = 1;
+        if (tour.getCountry() != null) {
+            preparedStatement.setString(n++, tour.getType());
+        }
+        if (tour.getCity() != null) {
+            preparedStatement.setString(n++, tour.getCity());
+        }
+        if (tour.getHotelName() != null) {
+            preparedStatement.setString(n++, tour.getHotelName());
+        }
+        if (tour.getHotelType() != 0) {
+            preparedStatement.setInt(n++, tour.getHotelType());
+        }
+        if (tour.getDuration() != 0) {
+            preparedStatement.setInt(n++, tour.getDuration());
+        }
+        if (tour.getPeopleQuantity() != 0) {
+            preparedStatement.setInt(n++, tour.getPeopleQuantity());
+        }
+        if (tour.getPrice() != 0) {
+            preparedStatement.setInt(n++, tour.getPrice());
+        }
+        if (tour.isLastMinute()) {
+            preparedStatement.setBoolean(n++, !tour.isLastMinute());
+        }
+        if (tour.getType() != null) {
+            preparedStatement.setString(n++, tour.getType());
+        }
+        if (tour.getStatus() != null) {
+            preparedStatement.setString(n++, tour.getStatus());
+        }
+        if (tour.getSale() != 0) {
+            preparedStatement.setInt(n++, tour.getPrice());
+        }
+        preparedStatement.setInt(n, tour.getId());
     }
 
     private String queryByFilter(TourFilter filter) {
@@ -206,6 +289,49 @@ public class TourDao extends Dao {
         return query;
     }
 
+    private String queryByTour(Tour tour) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(SQL_UPDATE_TOUR);
+        if (tour.getCountry() != null) {
+            stringBuilder.append("country=?").append(", ");
+        }
+        if (tour.getCity() != null) {
+            stringBuilder.append("city=?").append(", ");
+        }
+        if (tour.getHotelName() != null) {
+            stringBuilder.append("hotel_name=?").append(", ");
+        }
+        if (tour.getHotelType() != 0) {
+            stringBuilder.append("hotel_type=?").append(", ");
+        }
+        if (tour.getDuration() != 0) {
+            stringBuilder.append("duration=?").append(", ");
+        }
+        if (tour.getPeopleQuantity() != 0) {
+            stringBuilder.append("people_quantity=?").append(", ");
+        }
+        if (tour.getPrice() != 0) {
+            stringBuilder.append("price=?").append(", ");
+        }
+        if (tour.isLastMinute()) {
+            stringBuilder.append("last_minute=?").append(", ");
+        }
+        if (tour.getType() != null) {
+            stringBuilder.append("type=?").append(", ");
+        }
+        if (tour.getStatus() != null) {
+            stringBuilder.append("status=?").append(", ");
+        }
+        if (tour.getSale() != 0) {
+            stringBuilder.append("sale=?").append(", ");
+        }
+        stringBuilder.delete(stringBuilder.length()-2, stringBuilder.length());
+        stringBuilder.append(" ").append("WHERE id=?");
+        String query = stringBuilder.toString();
+        LOG.trace("Query is created --> " + query);
+        return query;
+    }
+
     private Tour extractTour(ResultSet rs) throws SQLException {
         Tour tour = new Tour();
         tour.setId(rs.getInt("id"));
@@ -219,6 +345,7 @@ public class TourDao extends Dao {
         tour.setLastMinute(rs.getBoolean("last_minute"));
         tour.setType(rs.getString("type"));
         tour.setStatus(rs.getString("status"));
+        tour.setSale(rs.getInt("sale"));
         return tour;
     }
 }
