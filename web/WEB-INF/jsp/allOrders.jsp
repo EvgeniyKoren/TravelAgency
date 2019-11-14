@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+
 <html>
 <c:set var="title" value="All orders" scope="page" />
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
@@ -9,7 +9,7 @@
         <table id="list" border="1">
             <thead>
             <tr>
-                <td>№</td>
+                <td>&#8470;</td>
                 <td>User id</td>
                 <td>Tour id</td>
                 <td>Is handled</td>

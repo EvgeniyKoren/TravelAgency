@@ -1,11 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+
 <html>
 <c:set var="title" value="Sign in" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<%--<%@ include file="/WEB-INF/jspf/header.jspf"%>--%>
-<h1>here is a sign in page</h1>
+<%@ include file="/WEB-INF/jspf/header.jspf"%>
+
 <p>Enter your data and press sign in...</p>
 <div id="form_container">
     <form id="signIn_form" action="controller" method="post">

@@ -1,12 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="fields"/>
+
+<html lang="${sessionScope.lang}">
 
 <body>
 <c:if test="${not empty allTours}">
     <div>
-        <h2>Bookable tours</h2>
-        <table id="list" border="1">
+        <h2 class="text-info"><fmt:message key="tours.welcome" /></h2>
+        <table id="list" border="1" class="mx-auto mb-5 table table-striped">
             <thead>
             <tr>
                 <td>№</td>
@@ -58,15 +63,15 @@
     <form action="controller">
         <p>Select tour by:</p>
         <input type="hidden" name="command" value="showTours"/>
-        <select name="type" size="1">
+        <select name="filterType" size="1">
             <option disabled selected>type of tour</option>
             <option value="rest">rest</option>
             <option value="excursion">excursion</option>
             <option value="shopping">shopping</option>
         </select>
-        <input type="number" name="price" placeholder="price"/>
-        <input type="number" name="peopleQuantity" placeholder="people quantity"/>
-        <input type="number" name="hotelType" placeholder="hotel's type"/>
+        <input type="number" name="filterPrice" placeholder="price"/>
+        <input type="number" name="filterPeopleQuantity" placeholder="people quantity"/>
+        <input type="number" name="filterHotelType" placeholder="hotel's type"/>
         <input type="submit" value="Select">
     </form>
 </div>

@@ -1,78 +1,72 @@
-<%--=========================================================================== 
+<%--===========================================================================
 Header (top area). 
 ===========================================================================--%> 
 
-<%--<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>--%>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 
-<tr>
-<td id="header">
+<div id="header">
 
-<c:if test="${not empty user}">
-<%--=========================================================================== 
-This is the user menu. 
-===========================================================================--%> 
+	<c:if test="${not empty user}">
+	<%--===========================================================================
+	This is the user menu.
+	===========================================================================--%>
 
-<div id="leftHeader">
+	<div id="leftHeader">
 
-	<c:choose>
+		<c:choose>
 
-<%--=========================================================================== 
-This way we define the ADMIN MENU. 
-===========================================================================--%> 
-		<c:when test="${userRole.name == 'admin' }">
-			<a href="controller?command=redirect&pageName=admin">Your account</a>
-		</c:when>
+	<%--===========================================================================
+	This way we define the ADMIN MENU.
+	===========================================================================--%>
+			<c:when test="${userRole.name == 'admin' }">
+				<a href="controller?command=redirect&pageName=admin"><fmt:message key="header.account" /></a>
+			</c:when>
 
-		
-<%--=========================================================================== 
-This way we define the USER MENU.
-===========================================================================--%> 
-		<c:otherwise>
-			<a href="controller?command=redirect&pageName=userPage">Your account</a>
-		</c:otherwise>
-	</c:choose>
-	
-<%--=========================================================================== 
-This way we define the settings anchor.
-===========================================================================--%> 
-	<a href="controller?command=viewSettings">Settings</a> &nbsp;
+	<%--===========================================================================
+	This way we define the USER MENU.
+	===========================================================================--%>
+			<c:otherwise>
+				<a href="controller?command=redirect&pageName=userPage"><fmt:message key="header.account" /></a>
+			</c:otherwise>
+		</c:choose>
 
-</div>
+	<%--===========================================================================
+	This way we define the settings anchor.
+	===========================================================================--%>
+		<a href="controller?command=logout"><fmt:message key="header.logout" /></a>
 
-<%--=========================================================================== 
-This way we define the menu located at the right of header. 
-===========================================================================--%> 
-<div id="rightHeader" >
+			<%--===========================================================================
+        Type user name if the user object is presented in the current session.
+        ===========================================================================--%>
+		<c:out value="${user.firstName} ${user.lastName}"/>
 
-<%--=========================================================================== 
-Type user name if the user object is presented in the current session.  
-===========================================================================--%> 
-	<c:out value="${user.firstName} ${user.lastName}"/>
-	
-<%--=========================================================================== 
-Type user role name if the user object is presented in the current session.  
-===========================================================================--%> 
-	<c:if test="${not empty userRole}">
-		<c:out value="(${userRole.name})"/>
+			<%--===========================================================================
+            Type user role name if the user object is presented in the current session.
+            ===========================================================================--%>
+		<c:if test="${not empty userRole}">
+			<c:out value="(${userRole.name})"/>
+		</c:if>
+
+	</div>
 	</c:if>
 
-<%--=========================================================================== 
-Type link to logout  
-===========================================================================--%> 
-	<a href="controller?command=logout">
-		Logout
-	</a> 	
+	<c:if test="${empty user and title ne 'Login'}">
+		<a href="login.jsp"><fmt:message key="header.login" /></a>
+		<a href="index.jsp"><fmt:message key="header.home" /></a>
+	</c:if>
+<%--===========================================================================
+This way we define the menu located at the right of header.
+===========================================================================--%>
+	<div id="rightHeader" >
+
+	<%--===========================================================================
+	Type link to logout
+	===========================================================================--%>
+		<ul>
+			<li><a href="controller?command=setLanguage&sessionLocale=en"><fmt:message key="label.lang.en" /></a></li>
+			<li><a href="controller?command=setLanguage&sessionLocale=ru"><fmt:message key="label.lang.ru" /></a></li>
+		</ul>
+	</div>
 
 </div>
-</c:if>
-
-<c:if test="${empty user and title ne 'Login'}">
-	<div id="rightHeader">
-		<a href="login.jsp">Login</a>
-	</div>
-</c:if>
-
-	</td>
-</tr>
 

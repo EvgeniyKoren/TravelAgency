@@ -25,6 +25,7 @@ public class CommandContainer {
 		commands.put("redirect", new RedirectCommand());
 		commands.put("noCommand", new NoCommand());
 		commands.put("showTours", new ShowToursCommand());
+		commands.put("setLanguage", new SetLanguageCommand());
 
 		// client commands
 		commands.put("order", new OrderCommand());

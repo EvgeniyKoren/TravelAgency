@@ -49,35 +49,49 @@
 	Delimiter - space/tab
 =============================================================-->
 
-    <filter>
-        <filter-name>CommandAccessFilter</filter-name>
-        <filter-class>ua.nure.koren.SummaryTask4.web.filter.CommandAccessFilter</filter-class>
-        <init-param>
-            <param-name>admin</param-name>
-            <param-value>modifyUsers showUsers addOrUpdateTour deleteTour showOrders</param-value>
-        </init-param>
-        <init-param>
-            <param-name>manager</param-name>
-            <param-value>changeTour showOrders</param-value>
-        </init-param>
-        <init-param>
-            <param-name>customer</param-name>
-            <param-value>order</param-value>
-        </init-param>
-        <init-param>
-            <param-name>common</param-name>
-            <param-value>logout noCommand</param-value>
-        </init-param>
-        <init-param>
-            <param-name>out-of-control</param-name>
-            <param-value>login signIn redirect showTours</param-value>
-        </init-param>
-    </filter>
+<!--    <filter>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <filter-class>ua.nure.koren.SummaryTask4.web.filter.CommandAccessFilter</filter-class>-->
+<!--        <init-param>-->
+<!--            <param-name>admin</param-name>-->
+<!--            <param-value>modifyUsers showUsers addOrUpdateTour deleteTour showOrders</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>manager</param-name>-->
+<!--            <param-value>changeTour showOrders</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>customer</param-name>-->
+<!--            <param-value>order</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>common</param-name>-->
+<!--            <param-value>logout noCommand</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>out-of-control</param-name>-->
+<!--            <param-value>login signIn redirect showTours</param-value>-->
+<!--        </init-param>-->
+<!--    </filter>-->
 
-    <filter-mapping>
-        <filter-name>CommandAccessFilter</filter-name>
-        <servlet-name>Controller</servlet-name>
-    </filter-mapping>
+<!--    <filter-mapping>-->
+<!--        <filter-name>CommandAccessFilter</filter-name>-->
+<!--        <servlet-name>Controller</servlet-name>-->
+<!--    </filter-mapping>-->
+
+    <!--============================================================
+	Locale Filter
+    =============================================================&ndash;&gt;-->
+<!--    <filter>-->
+<!--        <filter-name>SessionLocaleFilter</filter-name>-->
+<!--        <filter-class>ua.nure.koren.SummaryTask4.web.filter.SessionLocaleFilter</filter-class>-->
+<!--    </filter>-->
+
+<!--    <filter-mapping>-->
+<!--        <filter-name>SessionLocaleFilter</filter-name>-->
+<!--        <url-pattern>/*</url-pattern>-->
+<!--&lt;!&ndash;        <servlet-name>/*</servlet-name>&ndash;&gt;-->
+<!--    </filter-mapping>-->
 
     <!--============================================================
 	Error page

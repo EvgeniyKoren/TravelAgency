@@ -28,31 +28,31 @@ public class ShowToursCommand extends Command {
 
         TourDao tourDao = TourDao.getInstance();
 
-        String type = request.getParameter("type");
-        LOG.trace("Request parameter: type --> " + type);
-        String price = request.getParameter("price");
-        LOG.trace("Request parameter: price --> " + price);
-        String peopleQuantity = request.getParameter("peopleQuantity");
-        LOG.trace("Request parameter: peopleQuantity --> " + peopleQuantity);
-        String hotelType = request.getParameter("hotelType");
-        LOG.trace("Request parameter: hotelType --> " + hotelType);
+        String filterType = request.getParameter("filterType");
+        LOG.trace("Request parameter: type --> " + filterType);
+        String filterPrice = request.getParameter("filterPrice");
+        LOG.trace("Request parameter: price --> " + filterPrice);
+        String filterPeopleQuantity = request.getParameter("filterPeopleQuantity");
+        LOG.trace("Request parameter: peopleQuantity --> " + filterPeopleQuantity);
+        String filterHotelType = request.getParameter("filterHotelType");
+        LOG.trace("Request parameter: hotelType --> " + filterHotelType);
 
         TourFilter tourFilter = new TourFilter();
 
-        if (type != null && !type.isEmpty()) {
-            tourFilter.setType(type);
+        if (filterType != null && !filterType.isEmpty()) {
+            tourFilter.setType(filterType);
         }
-        if (price != null && !price.isEmpty()) {
-            int filterPrice = Integer.parseInt(price);
-            tourFilter.setPrice(filterPrice);
+        if (filterPrice != null && !filterPrice.isEmpty()) {
+            int price = Integer.parseInt(filterPrice);
+            tourFilter.setPrice(price);
         }
-        if (peopleQuantity != null && !peopleQuantity.isEmpty()) {
-            int filterPeopleQuantity = Integer.parseInt(peopleQuantity);
-            tourFilter.setPeopleQuantity(filterPeopleQuantity);
+        if (filterPeopleQuantity != null && !filterPeopleQuantity.isEmpty()) {
+            int peopleQuantity = Integer.parseInt(filterPeopleQuantity);
+            tourFilter.setPeopleQuantity(peopleQuantity);
         }
-        if (hotelType != null && !hotelType.isEmpty()) {
-            int filterHotelType = Integer.parseInt(hotelType);
-            tourFilter.setHotelType(filterHotelType);
+        if (filterHotelType != null && !filterHotelType.isEmpty()) {
+            int hotelType = Integer.parseInt(filterHotelType);
+            tourFilter.setHotelType(hotelType);
         }
         LOG.trace("TourFilter object is created --> " + tourFilter);
 
