@@ -51,6 +51,7 @@ public class OrderCommand extends Command {
         boolean success = orderDao.insertOrder(userId, tourId);
         if (success) {
             Order order = new Order(userId, tourId);
+            tourDao.changeTourStatus(tour,"registered");
             LOG.trace("User " + user.getLogin() + " has made an order of tour " + tourId);
             LOG.trace("Order --> " + order);
         }

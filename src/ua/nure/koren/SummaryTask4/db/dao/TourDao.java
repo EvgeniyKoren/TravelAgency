@@ -112,6 +112,7 @@ public class TourDao extends Dao {
             preparedStatement.setInt(n, tour.getId());
             rowsNum = preparedStatement.executeUpdate();
             connection.commit();
+            LOG.trace("Status of the tour changed to --> " + status);
         } catch (SQLException e) {
             rollback(connection);
             throw new DBException(Messages.ERR_CANNOT_UPDATE_TOUR_TYPE, e);

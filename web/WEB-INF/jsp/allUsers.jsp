@@ -5,17 +5,17 @@
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
     <%@ include file="/WEB-INF/jspf/header.jspf"%>
-    <h2>Registered users</h2>
+    <h2><fmt:message key="users.allUsers" /></h2>
     <div>
         <table id="list" border="1">
             <thead>
             <tr>
                 <td>№</td>
-                <td>first name</td>
-                <td>last name</td>
-                <td>login</td>
-                <td>status</td>
-                <td>role</td>
+                <td><fmt:message key="signIn.firstName" /></td>
+                <td><fmt:message key="signIn.lastName" /></td>
+                <td><fmt:message key="login.login" /></td>
+                <td><fmt:message key="signIn.status" /></td>
+                <td><fmt:message key="signIn.role" /></td>
             </tr>
             </thead>
 
@@ -51,10 +51,13 @@
         </table>
     </div>
     <div id="form_container">
+        <h2><fmt:message key="users.change.status" /></h2>
         <form action="controller" method="post">
             <input type="hidden" name="command" value="modifyUser"/>
-            <input type="text" name="userLogin" placeholder="user login"/>
-            <input type="submit" value="change status">
+            <h2><fmt:message key="users.user.login" var="userLogin"/></h2>
+            <input type="text" name="userLogin" placeholder="${userLogin}"/>
+            <h2><fmt:message key="users.status.batton" var="changeStatus"/></h2>
+            <input type="submit" value="${changeStatus}">
         </form>
     </div>
     <%@ include file="/WEB-INF/jspf/footer.jspf"%>
