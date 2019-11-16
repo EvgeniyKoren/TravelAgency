@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="m" uri="http://nure.ua/finalTask" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <fmt:setLocale value="${sessionScope.lang}"/>
@@ -15,7 +16,7 @@
             <table id="list" class="mx-auto table table-striped">
                 <thead>
                     <tr class="text-center bg-secondary text-light">
-                        <td>№</td>
+                        <td>&#8470;</td>
                         <td><fmt:message key="tours.country" /></td>
                         <td><fmt:message key="tours.city" /></td>
                         <td><fmt:message key="tours.hotel" /></td>
@@ -36,11 +37,11 @@
                         <td>${item.country}</td>
                         <td>${item.city}</td>
                         <td>${item.hotelName}</td>
-                        <td class="text-center">${item.hotelType}</td>
+                        <td class="text-center"><m:reflectStars stars="${item.hotelType}"/></td>
                         <td class="text-center">${item.duration}</td>
                         <td class="text-center">${item.peopleQuantity}</td>
                         <td class="text-center">${item.price}</td>
-                        <td class="text-center">${item.lastMinute}</td>
+                        <td class="text-center"><m:showLastMinute lastMinute="${item.lastMinute}"/></td>
                         <td class="text-center">${item.type}</td>
                         <td class="text-center">${item.status}</td>
                         <c:choose>

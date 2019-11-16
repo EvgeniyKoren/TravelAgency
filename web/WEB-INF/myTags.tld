@@ -1,0 +1,32 @@
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.2</tlib-version>
+    <short-name>myLib</short-name>
+    <uri>http://nure.ua/finalTask</uri>
+
+    <tag>
+        <name>reflectStars</name>
+        <tag-class>ua.nure.koren.summaryTask4.web.tagHandlers.StarsReflection</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>stars</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>showLastMinute</name>
+        <tag-class>ua.nure.koren.summaryTask4.web.tagHandlers.BurningReflection</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>lastMinute</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+</taglib>

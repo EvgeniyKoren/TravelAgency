@@ -4,6 +4,6 @@
 
     <endpoint
             name='HelloWorld'
-            implementation='ua.nure.koren.SummaryTask4.HelloWorld'
+            implementation='ua.nure.koren.summaryTask4.HelloWorld'
             url-pattern='/services/HelloWorld'/>
 </endpoints>

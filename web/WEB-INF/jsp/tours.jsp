@@ -5,7 +5,7 @@
 
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 <body>
-<div class="container text-center">
+<div class="container text-center bg-light p-0">
     <%@ include file="/WEB-INF/jspf/header.jspf" %>
     <jsp:include page="/WEB-INF/jsp/allTours.jsp"/>
     <c:if test="${empty user}">

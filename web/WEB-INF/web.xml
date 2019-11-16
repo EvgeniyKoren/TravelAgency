@@ -14,7 +14,7 @@
 <!--    </listener>-->
     <servlet>
         <servlet-name>Controller</servlet-name>
-        <servlet-class>ua.nure.koren.SummaryTask4.web.Controller</servlet-class>
+        <servlet-class>ua.nure.koren.summaryTask4.web.Controller</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -27,7 +27,7 @@
 =============================================================-->
     <filter>
         <filter-name>EncodingFilter</filter-name>
-        <filter-class>ua.nure.koren.SummaryTask4.web.filter.EncodingFilter</filter-class>
+        <filter-class>ua.nure.koren.summaryTask4.web.filter.EncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
@@ -51,7 +51,7 @@
 
     <filter>
         <filter-name>CommandAccessFilter</filter-name>
-        <filter-class>ua.nure.koren.SummaryTask4.web.filter.CommandAccessFilter</filter-class>
+        <filter-class>ua.nure.koren.summaryTask4.web.filter.CommandAccessFilter</filter-class>
         <init-param>
             <param-name>admin</param-name>
             <param-value>modifyUsers showUsers addOrUpdateTour deleteTour showOrders login</param-value>
