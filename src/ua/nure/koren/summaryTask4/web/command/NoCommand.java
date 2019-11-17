@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author D.Kolesnikov
  * 
  */
-public class NoCommand extends Command {
+public class NoCommand extends AbstractCommand {
 
 	private static final long serialVersionUID = -2785976616686657267L;
 

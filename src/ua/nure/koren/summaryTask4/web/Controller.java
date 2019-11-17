@@ -3,7 +3,7 @@ package ua.nure.koren.summaryTask4.web;
 import org.apache.log4j.Logger;
 import ua.nure.koren.summaryTask4.Path;
 import ua.nure.koren.summaryTask4.exception.AppException;
-import ua.nure.koren.summaryTask4.web.command.Command;
+import ua.nure.koren.summaryTask4.web.command.AbstractCommand;
 import ua.nure.koren.summaryTask4.web.command.CommandContainer;
 
 import javax.servlet.ServletException;
@@ -38,7 +38,7 @@ public class Controller extends HttpServlet {
         LOG.trace("Request parameter: command --> " + commandName);
 
         // obtain command object by its name
-        Command command = CommandContainer.get(commandName);
+        AbstractCommand command = CommandContainer.get(commandName);
         LOG.trace("Obtained command --> " + command);
 
         // execute command and get forward address

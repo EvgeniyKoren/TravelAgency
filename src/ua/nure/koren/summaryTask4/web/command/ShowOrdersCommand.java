@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ShowOrdersCommand extends Command {
+public class ShowOrdersCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478778L;
 

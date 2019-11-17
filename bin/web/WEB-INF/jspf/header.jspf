@@ -1,0 +1,82 @@
+<%--===========================================================================
+Header (top area). 
+===========================================================================--%> 
+
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+
+<div id="header" class="d-flex justify-content-between text-white bg-dark p-2">
+
+	<c:if test="${not empty user}">
+	<%--===========================================================================
+	This is the user menu.
+	===========================================================================--%>
+
+	<div id="leftHeader" class="d-flex">
+
+		<c:choose>
+
+	<%--===========================================================================
+	This way we define the ADMIN MENU.
+	===========================================================================--%>
+			<c:when test="${userRole.name == 'admin' }">
+				<a href="controller?command=redirect&pageName=admin" class="btn btn-outline-success mr-3">
+					<fmt:message key="header.account" /></a>
+			</c:when>
+
+	<%--===========================================================================
+	This way we define the USER MENU.
+	===========================================================================--%>
+			<c:otherwise>
+				<a href="controller?command=redirect&pageName=userPage" class="btn btn-outline-success mr-3">
+					<fmt:message key="header.account" /></a>
+			</c:otherwise>
+		</c:choose>
+
+	<%--===========================================================================
+	This way we define the settings anchor.
+	===========================================================================--%>
+		<a href="controller?command=logout" class="btn btn-outline-success mr-3">
+			<fmt:message key="header.logout" /></a>
+
+			<%--===========================================================================
+        Type user name if the user object is presented in the current session.
+        ===========================================================================--%>
+		<span class="d-block mr-3 p-2 text-center align-middle text-light">
+			<c:out value="${user.firstName} ${user.lastName}"/>
+			<%--===========================================================================
+			Type user role name if the user object is presented in the current session.
+			===========================================================================--%>
+			<c:if test="${not empty userRole}">
+				<c:out value="(${userRole.name})"/>
+			</c:if>
+		</span>
+
+	</div>
+	</c:if>
+	<div id="leftHeader" class="d-flex">
+		<c:if test="${empty user and title ne 'Login'}">
+			<a href="login.jsp" class="btn btn-outline-success mr-3"><fmt:message key="header.login" /></a>
+			<a href="index.jsp" class="btn btn-outline-success mr-3"><fmt:message key="header.home" /></a>
+		</c:if>
+		<c:if test="${empty user and title eq 'Login'}">
+			<a href="index.jsp" class="btn btn-outline-success mr-3"><fmt:message key="header.home" /></a>
+		</c:if>
+	</div>
+<%--===========================================================================
+This way we define the menu located at the right of header.
+===========================================================================--%>
+	<div id="rightHeader" >
+
+	<%--===========================================================================
+	Type link to logout
+	===========================================================================--%>
+		<ul class="list-unstyled d-flex m-0">
+			<li><a href="controller?command=setLanguage&sessionLocale=en" class="btn btn-outline-success ml-3">
+				<fmt:message key="label.lang.en" /></a></li>
+			<li><a href="controller?command=setLanguage&sessionLocale=ru" class="btn btn-outline-success ml-3">
+				<fmt:message key="label.lang.ru" /></a></li>
+		</ul>
+	</div>
+
+</div>
+

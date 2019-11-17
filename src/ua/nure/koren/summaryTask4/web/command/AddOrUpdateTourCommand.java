@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AddOrUpdateTourCommand extends Command {
+public class AddOrUpdateTourCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692987L;
 

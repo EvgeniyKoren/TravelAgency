@@ -15,7 +15,7 @@ public class CommandContainer {
 	
 	private static final Logger LOG = Logger.getLogger(CommandContainer.class);
 	
-	private static Map<String, Command> commands = new TreeMap<>();
+	private static Map<String, AbstractCommand> commands = new TreeMap<>();
 	
 	static {
 		// common commands
@@ -51,7 +51,7 @@ public class CommandContainer {
 	 *            Name of the command.
 	 * @return Command object.
 	 */
-	public static Command get(String commandName) {
+	public static AbstractCommand get(String commandName) {
 		if (commandName == null || !commands.containsKey(commandName)) {
 			LOG.trace("Command not found, name --> " + commandName);
 			return commands.get("noCommand"); 

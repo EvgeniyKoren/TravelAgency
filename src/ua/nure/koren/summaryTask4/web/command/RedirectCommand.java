@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author E.Koren
  * 
  */
-public class RedirectCommand extends Command {
+public class RedirectCommand extends AbstractCommand {
 	
 	private static final long serialVersionUID = -3071536593627692473L;
 	

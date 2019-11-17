@@ -12,18 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ShowUsersCommand extends Command {
+public class ShowUsersCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478364L;
 
     private static final Logger LOG = Logger.getLogger(ShowUsersCommand.class);
 
+    private UserDao userDao = UserDao.getInstance();
+
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
         LOG.debug("Command starts");
-
-        UserDao userDao = UserDao.getInstance();
 
         List<User> users = userDao.findAllUsers();
         LOG.trace("Found in DB: userList --> " + users);

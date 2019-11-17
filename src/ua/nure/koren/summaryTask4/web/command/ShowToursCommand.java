@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class ShowToursCommand extends Command {
+public class ShowToursCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7732286214029478505L;
 

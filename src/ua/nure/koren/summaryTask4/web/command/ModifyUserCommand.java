@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ModifyUserCommand extends Command {
+public class ModifyUserCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478313L;
 

@@ -10,7 +10,7 @@ import ua.nure.koren.summaryTask4.exception.Messages;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ChangeTourCommand extends Command {
+public class ChangeTourCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478788L;
 

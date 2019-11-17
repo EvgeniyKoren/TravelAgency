@@ -14,7 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao extends Dao {
+public class OrderDao extends AbstractDao {
 
     private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUE(DEFAULT, ?, ?, false)";
     private static final String SQL_FIND_ALL_ORDERS = "SELECT * FROM orders";

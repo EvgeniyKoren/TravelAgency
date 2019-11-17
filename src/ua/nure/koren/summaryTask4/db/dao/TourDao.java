@@ -15,7 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TourDao extends Dao {
+public class TourDao extends AbstractDao {
 
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours WHERE 1=1 ";
     private static final String SQL_FIND_TOUR_BY_ID = "SELECT * FROM tours WHERE id=?";

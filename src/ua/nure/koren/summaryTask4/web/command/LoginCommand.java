@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class LoginCommand extends Command {
+public class LoginCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692473L;
 

@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class Dao {
+public abstract class AbstractDao {
 
-    private static final Logger LOG = Logger.getLogger(Dao.class);
+    private static final Logger LOG = Logger.getLogger(AbstractDao.class);
 
     void close(Connection con) {
         if (con != null) {
