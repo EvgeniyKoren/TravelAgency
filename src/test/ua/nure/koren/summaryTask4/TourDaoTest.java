@@ -12,7 +12,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
-public class TourDaoImplTest {
+public class TourDaoTest {
 
     private TourDao testInstance;
 

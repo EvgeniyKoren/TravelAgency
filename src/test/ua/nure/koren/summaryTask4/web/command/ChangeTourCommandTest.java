@@ -10,16 +10,12 @@ import ua.nure.koren.summaryTask4.db.entity.Tour;
 import ua.nure.koren.summaryTask4.exception.AppException;
 import ua.nure.koren.summaryTask4.web.command.ChangeTourCommand;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ChangeTourCommandTest {
+public class ChangeTourCommandTest extends AbstractTestCommand {
 
     @InjectMocks
     private ChangeTourCommand changeTourCommand;
@@ -27,12 +23,9 @@ public class ChangeTourCommandTest {
     @Mock
     private TourDao tourDao;
 
-
     @Test
     public void execute() throws AppException {
         // given
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
 
         String tourId = "1";
         String status = "free";
@@ -61,8 +54,6 @@ public class ChangeTourCommandTest {
     @Test(expected = AppException.class)
     public void executeTourIdIsNull() throws AppException {
         // given
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
 
         when(request.getParameter("tourId")).thenReturn(null);
 
@@ -73,8 +64,6 @@ public class ChangeTourCommandTest {
     @Test(expected = AppException.class)
     public void executeTourIdIsNegative() throws AppException {
         // given
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
 
         when(request.getParameter("tourId")).thenReturn("-1");
 
@@ -85,8 +74,6 @@ public class ChangeTourCommandTest {
     @Test(expected = AppException.class)
     public void executeSaleIsNegative() throws AppException {
         // given
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
 
         when(request.getParameter("tourId")).thenReturn("1");
         when(request.getParameter("sale")).thenReturn("-50");
@@ -97,9 +84,6 @@ public class ChangeTourCommandTest {
 
     @Test(expected = AppException.class)
     public void executeLastMinuteStatusSaleNull() throws AppException {
-        // given
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
 
         // when
         changeTourCommand.execute(request, response);

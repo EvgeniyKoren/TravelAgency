@@ -60,9 +60,9 @@ public class UserDao extends AbstractDao {
         Connection connection = DBManager.getConnection();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
+        int n = 1;
         try {
             preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
-            int n = 1;
             preparedStatement.setString(n, login);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
