@@ -12,7 +12,6 @@ public final class Path {
   public static final String PAGE_LOGIN = "/login.jsp";
   public static final String PAGE_ERROR_PAGE = "/WEB-INF/jsp/errorPage.jsp";
   public static final String PAGE_LIST_TOURS = "/WEB-INF/jsp/tours.jsp";
-  public static final String PAGE_ADMIN = "/WEB-INF/jsp/admin_page.jsp";
   public static final String PAGE_SIGN_IN = "/WEB-INF/jsp/signIn.jsp";
   public static final String PAGE_USER = "/WEB-INF/jsp/userPage.jsp";
   public static final String PAGE_LIST_USERS = "/WEB-INF/jsp/allUsers.jsp";

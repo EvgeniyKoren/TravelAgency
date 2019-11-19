@@ -18,13 +18,14 @@ public class AddOrUpdateTourCommand extends AbstractCommand {
 
     private static final Logger LOG = Logger.getLogger(AddOrUpdateTourCommand.class);
 
+    private TourDao tourDao = TourDao.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
 
         LOG.debug("Command starts");
 
         Tour tour = new Tour();
-        TourDao tourDao = TourDao.getInstance();
 
         String country = request.getParameter("country");
         LOG.trace("Request parameter: country --> " + country);

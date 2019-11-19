@@ -8,14 +8,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Root of all DAO.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public abstract class AbstractDao {
 
     private static final Logger LOG = Logger.getLogger(AbstractDao.class);
 
-    void close(Connection con) {
-        if (con != null) {
+    /**
+     * Closes a connection object.
+     */
+    void close(Connection connection) {
+        if (connection != null) {
             try {
-                con.close();
+                connection.close();
             } catch (SQLException ex) {
                 LOG.error(Messages.ERR_CANNOT_CLOSE_CONNECTION, ex);
             }
@@ -25,10 +35,10 @@ public abstract class AbstractDao {
     /**
      * Closes a statement object.
      */
-    void close(Statement stmt) {
-        if (stmt != null) {
+    void close(Statement statement) {
+        if (statement != null) {
             try {
-                stmt.close();
+                statement.close();
             } catch (SQLException ex) {
                 LOG.error(Messages.ERR_CANNOT_CLOSE_STATEMENT, ex);
             }
@@ -38,16 +48,19 @@ public abstract class AbstractDao {
     /**
      * Closes a result set object.
      */
-    private void close(ResultSet rs) {
-        if (rs != null) {
+    private void close(ResultSet resultSet) {
+        if (resultSet != null) {
             try {
-                rs.close();
+                resultSet.close();
             } catch (SQLException ex) {
                 LOG.error(Messages.ERR_CANNOT_CLOSE_RESULTSET, ex);
             }
         }
     }
 
+    /**
+     * Closes resources.
+     */
     void close(Connection con, Statement stmt, ResultSet rs) {
         close(rs);
         close(stmt);
@@ -57,13 +70,13 @@ public abstract class AbstractDao {
     /**
      * Rollbacks a connection.
      *
-     * @param con
+     * @param connection
      *            Connection to be rollbacked.
      */
-    void rollback(Connection con) {
-        if (con != null) {
+    void rollback(Connection connection) {
+        if (connection != null) {
             try {
-                con.rollback();
+                connection.rollback();
             } catch (SQLException ex) {
                 LOG.error("Cannot rollback transaction", ex);
             }

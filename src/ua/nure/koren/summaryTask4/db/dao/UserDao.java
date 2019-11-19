@@ -14,6 +14,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO for User. Provides connection between entity user and
+ * users table in travel_agency DB
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class UserDao extends AbstractDao {
 
     private static final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE login=?";
@@ -25,6 +33,16 @@ public class UserDao extends AbstractDao {
 
     private static UserDao instance;
 
+    /**
+     * Don't let anyone else instantiate this class
+     */
+    private UserDao() {}
+
+    /**
+     * Returns the userdao object associated with the current Java application
+     *
+     * @return instance of UserDao
+     */
     public static synchronized UserDao getInstance() {
         if (instance == null) {
             instance = new UserDao();

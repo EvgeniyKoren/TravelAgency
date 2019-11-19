@@ -47,15 +47,7 @@ public class LoginCommand extends AbstractCommand {
 
         String forward = Path.PAGE_ERROR_PAGE;
 
-        if (userRole == Role.ADMIN) {
-            forward = Path.PAGE_ADMIN;
-        }
-
-        if (userRole == Role.MANAGER) {
-            forward = Path.PAGE_USER;
-        }
-
-        if (userRole == Role.CUSTOMER) {
+        if (userRole != null) {
             forward = Path.PAGE_USER;
         }
 

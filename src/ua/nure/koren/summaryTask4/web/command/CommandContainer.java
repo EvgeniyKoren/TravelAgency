@@ -9,9 +9,10 @@ import java.util.TreeMap;
  * Holder for all commands.<br/>
  * 
  * @author E. Koren
- * 
+ * @version 1.0
+ * @since 2019-11-19
  */
-public class CommandContainer {
+public final class CommandContainer {
 	
 	private static final Logger LOG = Logger.getLogger(CommandContainer.class);
 	

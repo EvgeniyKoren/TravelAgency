@@ -6,13 +6,20 @@ import ua.nure.koren.summaryTask4.Path;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class PageContainer {
+/**
+ * Holder for all commands.<br/>
+ *
+ * @author E. Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
+final class PageContainer {
+
     private static final Logger LOG = Logger.getLogger(CommandContainer.class);
 
     private static Map<String, String> pages = new TreeMap<>();
 
     static {
-        pages.put("admin", Path.PAGE_ADMIN);
         pages.put("signIn", Path.PAGE_SIGN_IN);
         pages.put("userPage", Path.PAGE_USER);
         pages.put("error", Path.PAGE_ERROR_PAGE);
@@ -28,7 +35,7 @@ public class PageContainer {
      *            Name of the page.
      * @return String object.
      */
-    public static String getPageLocation(String page) {
+    static String getPageLocation(String page) {
         if (page == null || !pages.containsKey(page)) {
             LOG.trace("Page not found, name --> " + page);
             return pages.get("error");

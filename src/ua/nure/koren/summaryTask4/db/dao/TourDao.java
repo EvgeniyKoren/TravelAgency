@@ -15,6 +15,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO for Tour. Provides connection between entity tour and
+ * tours table in travel_agency DB
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class TourDao extends AbstractDao {
 
     private static final String SQL_FIND_ALL_TOURS = "SELECT * FROM tours WHERE 1=1 ";
@@ -30,6 +38,11 @@ public class TourDao extends AbstractDao {
     private static final Logger LOG = Logger.getLogger(TourDao.class);
 
     private static TourDao instance;
+
+    /**
+     * Don't let anyone else instantiate this class
+     */
+    private TourDao() {}
 
     public static synchronized TourDao getInstance() {
         if (instance == null) {

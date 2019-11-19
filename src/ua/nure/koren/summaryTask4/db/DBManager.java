@@ -11,10 +11,25 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DBManager {
+/**
+ * DB manager. Works with MySQL DB. Holders only one method which provides
+ * connection with database.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
+public final class DBManager {
 
     private static final Logger LOG = Logger.getLogger(DBManager.class);
 
+    /**
+     * Returns a DB connection from the Pool Connections. Before using this
+     * method you must configure the Date Source and the Connections Pool in
+     * your WEB_APP_ROOT/META-INF/context.xml file.
+     *
+     * @return DB connection.
+     */
     public static synchronized Connection getConnection() throws DBException {
         DataSource ds = null;
         Connection con = null;

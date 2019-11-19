@@ -15,6 +15,7 @@
                 </a> <fmt:message key="tours.or" />
                 <a href="controller?command=redirect&pageName=signIn"><i><fmt:message key="tours.signIn" /></i></a></p>
         </div>
+
     </c:if>
     <c:if test="${not empty user}">
         <c:choose>
@@ -24,9 +25,10 @@
             ===========================================================================--%>
             <c:when test="${userRole.name == 'admin' }">
                 <%--            delete tour form--%>
-                <div id="form_container"></div>
+                <hr>
+                <div id="form_container">
                 <p><fmt:message key="tours.admin.delete" /></p>
-                <form action="controller" method="post">
+                <form action="controller" method="post" class="pb-4">
                     <input type="hidden" name="command" value="deleteTour"/>
                     <fmt:message key="orders.tourId" var="tour_id" />
                     <input type="number" name="tourId" placeholder="${tour_id}"/>
@@ -35,6 +37,7 @@
                 </form>
                 </div>
                 <%--            add tour form--%>
+                <hr>
                 <div id="form_container">
                     <p><fmt:message key="tours.admin.addOrUpdate" /></p>
                     <form action="controller" method="post">
@@ -55,7 +58,7 @@
                         <input type="number" name="price" placeholder="${price}"/><br>
                         <fmt:message key="tours.sale" var="sale"/>
                         <input type="number" name="sale" placeholder="${sale}"/><br>
-                        <span><fmt:message key="tours.lastMinute" /></span><input type="checkbox" name="lastMinute" value="true"/><br>
+                        <span class="p-3 d-inline-block"><fmt:message key="tours.lastMinute" /></span><input type="checkbox" name="lastMinute" value="true"/><br>
                         <p>
                             <select name="type" size="1">
                                 <option disabled selected><fmt:message key="tours.type" /></option>
@@ -116,6 +119,7 @@
                 <%--            order tour form--%>
                 <c:choose>
                     <c:when test="${user.status == false}">
+                        <hr>
                         <div id="form_container">
                             <h5 class="p-4"><fmt:message key="tours.book.tour" /></h5>
                             <form action="controller" method="post">

@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public class StarsReflection extends TagSupport {
 
+    private static final long serialVersionUID = -5654982557199337368L;
+
     private static final char STAR_SYMBOL = '\u2606';
 
     private int stars;

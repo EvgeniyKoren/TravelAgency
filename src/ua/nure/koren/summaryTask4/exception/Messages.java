@@ -9,7 +9,6 @@ package ua.nure.koren.summaryTask4.exception;
 public class Messages {
 
 	private Messages() {
-		// no op
 	}
 	
 	public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain a connection from the pool";

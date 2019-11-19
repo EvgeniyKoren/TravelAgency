@@ -62,6 +62,7 @@
 <c:if test="${empty allTours}">
     <p><fmt:message key="tours.not.available" /></p>
 </c:if>
+<hr>
 <div id="form_container" class="container-fluid">
     <h5 class="p-4"><fmt:message key="tours.select.tour" /></h5>
     <form action="controller" class="d-flex">

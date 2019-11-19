@@ -12,40 +12,14 @@ Header (top area).
 	===========================================================================--%>
 
 	<div id="leftHeader" class="d-flex">
-
-		<c:choose>
-
-	<%--===========================================================================
-	This way we define the ADMIN MENU.
-	===========================================================================--%>
-			<c:when test="${userRole.name == 'admin' }">
-				<a href="controller?command=redirect&pageName=admin" class="btn btn-outline-success mr-3">
-					<fmt:message key="header.account" /></a>
-			</c:when>
-
-	<%--===========================================================================
-	This way we define the USER MENU.
-	===========================================================================--%>
-			<c:otherwise>
-				<a href="controller?command=redirect&pageName=userPage" class="btn btn-outline-success mr-3">
-					<fmt:message key="header.account" /></a>
-			</c:otherwise>
-		</c:choose>
-
-	<%--===========================================================================
-	This way we define the settings anchor.
-	===========================================================================--%>
+		<a href="controller?command=redirect&pageName=userPage" class="btn btn-outline-success mr-3">
+			<fmt:message key="header.account" /></a>
 		<a href="controller?command=logout" class="btn btn-outline-success mr-3">
 			<fmt:message key="header.logout" /></a>
 
-			<%--===========================================================================
-        Type user name if the user object is presented in the current session.
-        ===========================================================================--%>
 		<span class="d-block mr-3 p-2 text-center align-middle text-light">
 			<c:out value="${user.firstName} ${user.lastName}"/>
-			<%--===========================================================================
-			Type user role name if the user object is presented in the current session.
-			===========================================================================--%>
+
 			<c:if test="${not empty userRole}">
 				<c:out value="(${userRole.name})"/>
 			</c:if>
@@ -68,7 +42,7 @@ This way we define the menu located at the right of header.
 	<div id="rightHeader" >
 
 	<%--===========================================================================
-	Type link to logout
+	Type link to change language
 	===========================================================================--%>
 		<ul class="list-unstyled d-flex m-0">
 			<li><a href="controller?command=setLanguage&sessionLocale=en" class="btn btn-outline-success ml-3">

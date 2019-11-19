@@ -7,6 +7,8 @@ import java.io.IOException;
 
 public class BurningReflection extends TagSupport {
 
+    private static final long serialVersionUID = -5654982557199337369L;
+
     private static final String FIRE_SYMBOL = "\uD83D\uDD25";
 
     private boolean isLastMinute;

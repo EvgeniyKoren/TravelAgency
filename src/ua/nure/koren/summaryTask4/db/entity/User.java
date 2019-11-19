@@ -1,10 +1,18 @@
 package ua.nure.koren.summaryTask4.db.entity;
 
-public class User {
+/**
+ * User entity.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
+public class User extends AbstractEntity {
+
+    private static final long serialVersionUID = 122625786080834988L;
 
     private static final int CUSTOMER = 2;
 
-    private int id;
     private String firstName;
     private String lastName;
     private String login;
@@ -12,8 +20,19 @@ public class User {
     private boolean status;
     private int roleId;
 
+    /**
+     * Default constructor
+     */
     public User(){}
 
+    /**
+     * Constructor with parameters
+     *
+     * @param firstName User first name
+     * @param lastName User last name
+     * @param login User login
+     * @param password User password
+     */
     public User(String firstName, String lastName, String login, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,14 +40,6 @@ public class User {
         this.password = password;
         this.status = false;
         this.roleId = CUSTOMER;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {

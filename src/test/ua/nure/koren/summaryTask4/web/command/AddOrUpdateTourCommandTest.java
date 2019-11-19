@@ -8,7 +8,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import ua.nure.koren.summaryTask4.db.dao.TourDao;
 import ua.nure.koren.summaryTask4.db.entity.Tour;
 import ua.nure.koren.summaryTask4.exception.AppException;
-import ua.nure.koren.summaryTask4.exception.DBException;
 import ua.nure.koren.summaryTask4.web.command.AddOrUpdateTourCommand;
 
 import javax.servlet.ServletException;
@@ -58,7 +57,7 @@ public class AddOrUpdateTourCommandTest extends AbstractTestCommand {
         tour.setCountry(country);
         tour.setStatus(status);
 
-        when(tourDao.insertTour(tour)).thenReturn(true);
+//        when(tourDao.insertTour(tour)).thenReturn(true);
 
         //when
         String result = addOrUpdateTourCommand.execute(request, response);
@@ -81,7 +80,7 @@ public class AddOrUpdateTourCommandTest extends AbstractTestCommand {
         when(request.getParameter("tourId")).thenReturn(tourId);
 
         Tour tour = new Tour();
-        when(tourDao.updateTour(tour)).thenReturn(true);
+//        when(tourDao.updateTour(tour)).thenReturn(true);
 
         //when
         String result = addOrUpdateTourCommand.execute(request, response);

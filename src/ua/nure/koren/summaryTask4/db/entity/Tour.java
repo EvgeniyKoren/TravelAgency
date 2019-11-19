@@ -1,8 +1,16 @@
 package ua.nure.koren.summaryTask4.db.entity;
 
-public class Tour {
+/**
+ * Tour entity.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
+public class Tour extends AbstractEntity {
 
-    private int id;
+    private static final long serialVersionUID = 122225786080834988L;
+
     private String type;
     private String country;
     private String city;
@@ -14,14 +22,6 @@ public class Tour {
     private boolean lastMinute;
     private String status;
     private int sale;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getCity() {
         return city;

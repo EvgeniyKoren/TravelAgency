@@ -23,8 +23,6 @@ public class ChangeTourCommand extends AbstractCommand {
 
         LOG.debug("Command starts");
 
-//        TourDao tourDao = TourDao.getInstance();
-
         String tourId = request.getParameter("tourId");
         LOG.trace("Request parameter: tourId --> " + tourId);
         if (tourId == null || tourId.isEmpty()) {

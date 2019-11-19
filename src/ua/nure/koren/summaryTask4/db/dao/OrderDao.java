@@ -14,6 +14,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DAO for Order. Provides connection between entity order and
+ * orders table in travel_agency DB
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class OrderDao extends AbstractDao {
 
     private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUE(DEFAULT, ?, ?, false)";
@@ -22,6 +30,11 @@ public class OrderDao extends AbstractDao {
     private static final Logger LOG = Logger.getLogger(OrderDao.class);
 
     private static OrderDao instance;
+
+    /**
+     * Don't let anyone else instantiate this class
+     */
+    private OrderDao() {}
 
     public static synchronized OrderDao getInstance() {
         if (instance == null) {

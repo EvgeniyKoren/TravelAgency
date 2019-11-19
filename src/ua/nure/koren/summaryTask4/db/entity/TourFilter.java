@@ -1,11 +1,18 @@
 package ua.nure.koren.summaryTask4.db.entity;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * Container for search criteria to find {@link Tour} in DB.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
  */
-public class TourFilter {
+public class TourFilter implements Serializable {
+
+    private static final long serialVersionUID = 122025786080834988L;
 
     @NotNull
     private String type;
