@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * SetLanguageCommand command. Serves to switch the language.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class SetLanguageCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692478L;

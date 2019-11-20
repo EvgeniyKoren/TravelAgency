@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * No command.
- * 
- * @author D.Kolesnikov
- * 
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
  */
 public class NoCommand extends AbstractCommand {
 
-	private static final long serialVersionUID = -2785976616686657267L;
+	private static final long serialVersionUID = -2145976616686657267L;
 
 	private static final Logger LOG = Logger.getLogger(NoCommand.class);
 

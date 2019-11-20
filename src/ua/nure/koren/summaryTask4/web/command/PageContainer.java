@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Holder for all commands.<br/>
+ * Holder for all commands.
  *
  * @author E. Koren
  * @version 1.0

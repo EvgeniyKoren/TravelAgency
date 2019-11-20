@@ -13,6 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * ShowToursCommand command. Reflects all available tours in DB.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class ShowToursCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7732286214029478505L;

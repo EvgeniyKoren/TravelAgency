@@ -39,7 +39,7 @@ public class UserDao extends AbstractDao {
     private UserDao() {}
 
     /**
-     * Returns the userdao object associated with the current Java application
+     * Returns the UserDao object associated with the current Java application
      *
      * @return instance of UserDao
      */
@@ -51,6 +51,12 @@ public class UserDao extends AbstractDao {
         return instance;
     }
 
+    /**
+     * Returns all registered users.
+     *
+     * @return List of user entities.
+     * @throws DBException
+     */
     public List<User> findAllUsers() throws DBException {
         List<User> users = new ArrayList<>();
         Connection connection = DBManager.getConnection();
@@ -73,6 +79,14 @@ public class UserDao extends AbstractDao {
         return users;
     }
 
+    /**
+     * Finds and returns user with specified login
+     *
+     * @param login User login
+     * @return User
+     *              Entity of required user
+     * @throws DBException
+     */
     public User getUser(String login) throws DBException {
         User user = null;
         Connection connection = DBManager.getConnection();
@@ -97,6 +111,17 @@ public class UserDao extends AbstractDao {
         return user;
     }
 
+    /**
+     * Inserts a new user in DB
+     *
+     * @param firstName User first name
+     * @param lastName User last name
+     * @param login User login
+     * @param pass User password
+     * @return boolean
+     *                  true if operation succeeded
+     * @throws DBException
+     */
     public boolean insertUser(String firstName, String lastName, String login, String pass) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -120,6 +145,14 @@ public class UserDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Update user status
+     *
+     * @param user User entity which needs to be updated
+     * @return boolean
+     *                 true if operation succeeded
+     * @throws DBException
+     */
     public boolean updateUserStatus(User user) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -141,15 +174,22 @@ public class UserDao extends AbstractDao {
         return rowsNum > 0;
     }
 
-    private User extractUser(ResultSet rs) throws SQLException {
+    /**
+     * Assistive method which helps to extract user from DB
+     *
+     * @param resultSet ResultSet which returned after operation with DB
+     * @return User entity
+     * @throws SQLException
+     */
+    private User extractUser(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(rs.getInt("id"));
-        user.setFirstName(rs.getString("first_name"));
-        user.setLastName(rs.getString("last_name"));
-        user.setLogin(rs.getString("login"));
-        user.setPassword(rs.getString("pass"));
-        user.setStatus(rs.getBoolean("status"));
-        user.setRoleId(rs.getInt("role_id"));
+        user.setId(resultSet.getInt("id"));
+        user.setFirstName(resultSet.getString("first_name"));
+        user.setLastName(resultSet.getString("last_name"));
+        user.setLogin(resultSet.getString("login"));
+        user.setPassword(resultSet.getString("pass"));
+        user.setStatus(resultSet.getBoolean("status"));
+        user.setRoleId(resultSet.getInt("role_id"));
         return user;
     }
 }

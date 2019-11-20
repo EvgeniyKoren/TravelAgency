@@ -12,6 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * AddOrUpdateTourCommand command. Uses when needs to insert new tour in DB
+ * or update existed one.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class AddOrUpdateTourCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692987L;
@@ -21,7 +29,7 @@ public class AddOrUpdateTourCommand extends AbstractCommand {
     private TourDao tourDao = TourDao.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
         LOG.debug("Command starts");
 

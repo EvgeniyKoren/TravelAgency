@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * ShowUsersCommand command. Reflects all available users in DB.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class ShowUsersCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478364L;

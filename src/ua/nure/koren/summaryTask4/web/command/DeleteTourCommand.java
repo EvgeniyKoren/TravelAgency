@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * DeleteTourCommand command.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class DeleteTourCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692977L;
@@ -18,7 +25,7 @@ public class DeleteTourCommand extends AbstractCommand {
     private static final Logger LOG = Logger.getLogger(DeleteTourCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
         LOG.debug("Command starts");
 

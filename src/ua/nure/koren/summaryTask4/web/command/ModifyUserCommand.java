@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * ModifyUserCommand command. Uses for changing user state.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class ModifyUserCommand extends AbstractCommand {
 
     private static final long serialVersionUID = 7232286214029478313L;
@@ -18,7 +25,7 @@ public class ModifyUserCommand extends AbstractCommand {
     private static final Logger LOG = Logger.getLogger(ShowUsersCommand.class);
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, AppException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
         LOG.debug("Command starts");
 

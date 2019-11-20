@@ -10,9 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Logout command.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class LogoutCommand extends AbstractCommand {
 
-    private static final long serialVersionUID = -2785976616686657267L;
+    private static final long serialVersionUID = -1745976616686657267L;
 
     private static final Logger LOG = Logger.getLogger(LogoutCommand.class);
 

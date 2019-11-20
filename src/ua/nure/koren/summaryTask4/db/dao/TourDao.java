@@ -44,6 +44,11 @@ public class TourDao extends AbstractDao {
      */
     private TourDao() {}
 
+    /**
+     * Returns the TourDao object associated with the current Java application
+     *
+     * @return instance of TourDao
+     */
     public static synchronized TourDao getInstance() {
         if (instance == null) {
             instance = new TourDao();
@@ -52,6 +57,14 @@ public class TourDao extends AbstractDao {
         return instance;
     }
 
+    /**
+     * Finds and returns tour with specified id
+     *
+     * @param id Tour id
+     * @return Tour
+     *              Entity of required tour
+     * @throws DBException
+     */
     public Tour getTourById(int id) throws DBException {
         Tour tour = null;
         Connection connection = DBManager.getConnection();
@@ -74,6 +87,14 @@ public class TourDao extends AbstractDao {
         return tour;
     }
 
+    /**
+     * Returns all available tours
+     *
+     * @param filter TourFilter entity which filled up with
+     *               necessary parameters
+     * @return List of tour entities
+     * @throws DBException
+     */
     public List<Tour> findAllTours(TourFilter filter) throws DBException {
         List<Tour> tours = new ArrayList<>();
         Connection connection = DBManager.getConnection();
@@ -97,6 +118,15 @@ public class TourDao extends AbstractDao {
         return tours;
     }
 
+    /**
+     * Changes last minute status of tour
+     *
+     * @param tour
+     *              Tour entity which needs to be changed
+     * @return boolean
+     *                 true if operation succeeded
+     * @throws DBException
+     */
     public boolean makeLastMinute(Tour tour) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -118,6 +148,17 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Changes status of tour
+     *
+     * @param tour
+     *              Tour entity which needs to be changed
+     * @param status
+     *              New status of tour
+     * @return boolean
+     *                 true if operation succeeded
+     * @throws DBException
+     */
     public boolean changeTourStatus(Tour tour, String status) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -140,6 +181,17 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Sets sale for tour
+     *
+     * @param tour
+     *             Tour entity which needs to be changed
+     * @param sale
+     *             Sale that will be set to concrete tour
+     * @return boolean
+     *                 true if operation succeeded
+     * @throws DBException
+     */
     public boolean setSale(Tour tour, int sale) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -161,6 +213,15 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Inserts a new tour in DB
+     *
+     * @param tour
+     *              Tour which needs to be inserted
+     * @return boolean
+     *                true if operation succeeded
+     * @throws DBException
+     */
     public boolean insertTour(Tour tour) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement statement = null;
@@ -199,6 +260,14 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Removed tour with specified id
+     *
+     * @param id Tour id
+     * @return boolean
+     *                true if operation succeeded
+     * @throws DBException
+     */
     public boolean deleteTourById(int id) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -220,6 +289,16 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Update full information about tour or update a defined part of
+     * information.
+     *
+     * @param tour
+     *             Tour which needs to be updated
+     * @return boolean
+     *                true if operation succeeded
+     * @throws DBException
+     */
     public boolean updateTour(Tour tour) throws DBException {
         Connection connection = DBManager.getConnection();
         String sqlQuery = queryByTour(tour);
@@ -241,6 +320,16 @@ public class TourDao extends AbstractDao {
         return rowsNum > 0;
     }
 
+    /**
+     * Assistive method which helps to fill up statement with help of
+     * TourFilter object
+     *
+     * @param preparedStatement
+     *                          PreparedStatement object that needs to
+     *                          filled up
+     * @param filter TourFilter object which holds fresh information
+     * @throws SQLException
+     */
     private void populateStatement(PreparedStatement preparedStatement, TourFilter filter) throws SQLException {
         int n = 1;
         if (filter.getType() != null) {
@@ -257,6 +346,17 @@ public class TourDao extends AbstractDao {
         }
     }
 
+    /**
+     * Assistive method which helps to fill up statement with help of
+     * Tour object
+     *
+     * @param preparedStatement
+     *                          PreparedStatement object that needs to
+     *                          filled up
+     * @param tour
+     *            Tour object which holds fresh information
+     * @throws SQLException
+     */
     private void populateStatementByTour(PreparedStatement preparedStatement, Tour tour) throws SQLException {
         int n = 1;
         if (tour.getCountry() != null) {
@@ -295,6 +395,14 @@ public class TourDao extends AbstractDao {
         preparedStatement.setInt(n, tour.getId());
     }
 
+    /**
+     * Forms query for PreparedStatement. Checks what information holds
+     * tourFilter
+     *
+     * @param filter TourFilter object which holds fresh information
+     * @return String with prepared query
+     * @see TourFilter
+     */
     private String queryByFilter(TourFilter filter) {
         String query = SQL_FIND_ALL_TOURS;
         if (filter.getType() != null) {
@@ -315,6 +423,14 @@ public class TourDao extends AbstractDao {
         return query;
     }
 
+    /**
+     * Forms query for PreparedStatement. Checks what information holds
+     * tour
+     *
+     * @param tour TourFilter object which holds fresh information
+     * @return String with prepared query
+     * @see Tour
+     */
     private String queryByTour(Tour tour) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(SQL_UPDATE_TOUR);
@@ -358,20 +474,27 @@ public class TourDao extends AbstractDao {
         return query;
     }
 
-    private Tour extractTour(ResultSet rs) throws SQLException {
+    /**
+     * Assistive method which helps to extract user from DB
+     *
+     * @param resultSet ResultSet which returned after operation with DB
+     * @return Tour entity
+     * @throws SQLException
+     */
+    private Tour extractTour(ResultSet resultSet) throws SQLException {
         Tour tour = new Tour();
-        tour.setId(rs.getInt("id"));
-        tour.setCountry(rs.getString("country"));
-        tour.setCity(rs.getString("city"));
-        tour.setHotelName(rs.getString("hotel_name"));
-        tour.setHotelType(rs.getInt("hotel_type"));
-        tour.setDuration(rs.getInt("duration"));
-        tour.setPeopleQuantity(rs.getInt("people_quantity"));
-        tour.setPrice(rs.getInt("price"));
-        tour.setLastMinute(rs.getBoolean("last_minute"));
-        tour.setType(rs.getString("type"));
-        tour.setStatus(rs.getString("status"));
-        tour.setSale(rs.getInt("sale"));
+        tour.setId(resultSet.getInt("id"));
+        tour.setCountry(resultSet.getString("country"));
+        tour.setCity(resultSet.getString("city"));
+        tour.setHotelName(resultSet.getString("hotel_name"));
+        tour.setHotelType(resultSet.getInt("hotel_type"));
+        tour.setDuration(resultSet.getInt("duration"));
+        tour.setPeopleQuantity(resultSet.getInt("people_quantity"));
+        tour.setPrice(resultSet.getInt("price"));
+        tour.setLastMinute(resultSet.getBoolean("last_minute"));
+        tour.setType(resultSet.getString("type"));
+        tour.setStatus(resultSet.getString("status"));
+        tour.setSale(resultSet.getInt("sale"));
         return tour;
     }
 }

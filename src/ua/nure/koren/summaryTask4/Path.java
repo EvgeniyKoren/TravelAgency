@@ -4,7 +4,8 @@ package ua.nure.koren.summaryTask4;
  * Path holder (jsp pages, controller commands).
  *
  * @author E.Koren
- *
+ * @version 1.0
+ * @since 2019-11-19
  */
 public final class Path {
 

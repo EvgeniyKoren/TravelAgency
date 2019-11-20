@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Redirect command.
- * 
+ *
  * @author E.Koren
- * 
+ * @version 1.0
+ * @since 2019-11-19
  */
 public class RedirectCommand extends AbstractCommand {
 	

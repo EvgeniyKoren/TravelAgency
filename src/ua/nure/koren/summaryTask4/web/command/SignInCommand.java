@@ -11,6 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * SignInCommand command. Adds new user in DB.
+ *
+ * @author E.Koren
+ * @version 1.0
+ * @since 2019-11-19
+ */
 public class SignInCommand extends AbstractCommand {
 
     private static final long serialVersionUID = -3071536593627692943L;

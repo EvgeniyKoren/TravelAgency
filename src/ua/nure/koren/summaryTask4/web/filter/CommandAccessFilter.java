@@ -57,7 +57,14 @@ public class CommandAccessFilter implements Filter {
 					.forward(request, response);
 		}
 	}
-	
+
+	/**
+	 * Checks if current command is located in the list of allowed commands
+	 *
+	 * @param request Request object which comes to controller
+	 * @return boolean
+	 * 				true if current command is in the list
+	 */
 	private boolean accessAllowed(ServletRequest request) {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 

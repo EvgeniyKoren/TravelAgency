@@ -1,0 +1,11 @@
+test.ua.nure.koren.summaryTask4
+test.ua.nure.koren.summaryTask4.web.command
+ua.nure.koren.summaryTask4
+ua.nure.koren.summaryTask4.db
+ua.nure.koren.summaryTask4.db.dao
+ua.nure.koren.summaryTask4.db.entity
+ua.nure.koren.summaryTask4.exception
+ua.nure.koren.summaryTask4.web
+ua.nure.koren.summaryTask4.web.command
+ua.nure.koren.summaryTask4.web.filter
+ua.nure.koren.summaryTask4.web.tagHandlers

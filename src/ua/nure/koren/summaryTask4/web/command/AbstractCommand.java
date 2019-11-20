@@ -10,12 +10,14 @@ import java.io.Serializable;
 
 /**
  * Main interface for the Command pattern implementation.
- * 
+ *
  * @author E.Koren
- * 
+ * @version 1.0
+ * @since 2019-11-19
  */
 public abstract class AbstractCommand implements Serializable {
-	private static final long serialVersionUID = 8879403039606311780L;
+
+	private static final long serialVersionUID = 8879403055606311780L;
 
 	/**
 	 * Execution method for command.

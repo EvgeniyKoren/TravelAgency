@@ -36,6 +36,11 @@ public class OrderDao extends AbstractDao {
      */
     private OrderDao() {}
 
+    /**
+     * Returns the OrderDao object associated with the current Java application
+     *
+     * @return instance of OrderDao
+     */
     public static synchronized OrderDao getInstance() {
         if (instance == null) {
             instance = new OrderDao();
@@ -44,6 +49,15 @@ public class OrderDao extends AbstractDao {
         return instance;
     }
 
+    /**
+     * Insert new order in DB
+     *
+     * @param userId User id which makes an order
+     * @param tourId Tour id which ordered by user
+     * @return boolean
+     *                true if operation succeeded
+     * @throws DBException
+     */
     public boolean insertOrder(int userId, int tourId) throws DBException {
         Connection connection = DBManager.getConnection();
         PreparedStatement preparedStatement = null;
@@ -65,13 +79,12 @@ public class OrderDao extends AbstractDao {
         return  rowsNum > 0;
     }
 
-//    public Order getOrderById(int id) {
-//        Order order = new Order();
-//
-//
-//        return order;
-//    }
-
+    /**
+     * Returns all available orders
+     *
+     * @return List of order entities.
+     * @throws DBException
+     */
     public List<Order> findAllOrders() throws DBException {
         List<Order> orders = new ArrayList<>();
         Connection connection = DBManager.getConnection();
@@ -92,6 +105,13 @@ public class OrderDao extends AbstractDao {
         return orders;
     }
 
+    /**
+     * Assistive method which helps to extract order from DB
+     *
+     * @param resultSet ResultSet which returned after operation with DB
+     * @return Order entity
+     * @throws SQLException
+     */
     private Order extractOrders(ResultSet resultSet) throws SQLException {
         Order order = new Order();
         order.setId(resultSet.getInt("id"));

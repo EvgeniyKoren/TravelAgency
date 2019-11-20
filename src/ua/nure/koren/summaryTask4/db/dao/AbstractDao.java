@@ -15,7 +15,7 @@ import java.sql.Statement;
  * @version 1.0
  * @since 2019-11-19
  */
-public abstract class AbstractDao {
+abstract class AbstractDao {
 
     private static final Logger LOG = Logger.getLogger(AbstractDao.class);
 
