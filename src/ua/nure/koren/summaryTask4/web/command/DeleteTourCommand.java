@@ -6,10 +6,8 @@ import ua.nure.koren.summaryTask4.db.dao.TourDao;
 import ua.nure.koren.summaryTask4.exception.AppException;
 import ua.nure.koren.summaryTask4.exception.Messages;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * DeleteTourCommand command.
@@ -24,12 +22,12 @@ public class DeleteTourCommand extends AbstractCommand {
 
     private static final Logger LOG = Logger.getLogger(DeleteTourCommand.class);
 
+    private TourDao tourDao = TourDao.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
         LOG.debug("Command starts");
-
-        TourDao tourDao = TourDao.getInstance();
 
         String tourId = request.getParameter("tourId");
         LOG.trace("Request parameter: tourId --> " + tourId);

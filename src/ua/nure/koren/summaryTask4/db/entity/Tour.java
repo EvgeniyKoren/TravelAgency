@@ -114,6 +114,7 @@ public class Tour extends AbstractEntity {
     @Override
     public String toString() {
         return "Tour{" +
+                "id='" + getId() + '\'' +
                 "type='" + type + '\'' +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
@@ -127,4 +128,5 @@ public class Tour extends AbstractEntity {
                 ", sale=" + sale +
                 '}';
     }
+
 }

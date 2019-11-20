@@ -80,7 +80,11 @@ public class AddOrUpdateTourCommandTest extends AbstractTestCommand {
         when(request.getParameter("tourId")).thenReturn(tourId);
 
         Tour tour = new Tour();
-//        when(tourDao.updateTour(tour)).thenReturn(true);
+        tour.setCountry(country);
+        tour.setCity(city);
+        tour.setHotelName(hotelName);
+        tour.setId(2);
+        when(tourDao.updateTour(tour)).thenReturn(true);
 
         //when
         String result = addOrUpdateTourCommand.execute(request, response);
