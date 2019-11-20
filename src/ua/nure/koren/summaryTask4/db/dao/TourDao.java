@@ -261,7 +261,7 @@ public class TourDao extends AbstractDao {
     }
 
     /**
-     * Removed tour with specified id
+     * Removes tour with specified id
      *
      * @param id Tour id
      * @return boolean

@@ -4,11 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.nure.koren.summaryTask4.db.dao.TourDao;
 import ua.nure.koren.summaryTask4.db.entity.Tour;
-import ua.nure.koren.summaryTask4.exception.DBException;
 
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
@@ -18,7 +14,7 @@ public class TourDaoTest {
 
     @Before
     public void setUp() {
-       testInstance = TourDao.getInstance();
+        testInstance = TourDao.getInstance();
     }
 
     @Test
@@ -42,44 +38,6 @@ public class TourDaoTest {
         assertSame(instance, instanceSecondCall);
     }
 
-    @Test
-    public void getTourById() {
-        // given
-        Tour tour = new Tour();
-
-//        testInstance.insertTour();
-
-    }
-
-    @Test
-    public void findAllTours() {
-    }
-
-    @Test
-    public void makeLastMinute() {
-    }
-
-    @Test
-    public void changeTourStatus() {
-    }
-
-    @Test
-    public void setSale() {
-    }
-
-    @Test
-    public void insertTour() throws DBException {
-        // given
-        Tour tour = createTour();
-        assertThat(tour.getId(), is(0));
-
-        // when
-        testInstance.insertTour(tour);
-
-        // then
-        assertThat(tour.getId(), not(0));
-    }
-
     private Tour createTour() {
         Tour tour = new Tour();
         tour.setType("excursion");
@@ -94,13 +52,5 @@ public class TourDaoTest {
         tour.setStatus("free");
         tour.setSale(50);
         return tour;
-    }
-
-    @Test
-    public void deleteTourById() {
-    }
-
-    @Test
-    public void updateTour() {
     }
 }

@@ -4,18 +4,20 @@ import org.junit.Before;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import static org.mockito.Mockito.mock;
 
 public class AbstractTestCommand {
 
-    //todo: move to abstract test class
     protected HttpServletRequest request;
     protected HttpServletResponse response;
+    protected HttpSession session;
 
     @Before
     public void setUp() {
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
+        session = mock(HttpSession.class);
     }
 }

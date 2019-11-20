@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -84,13 +85,22 @@ public class AddOrUpdateTourCommandTest extends AbstractTestCommand {
         tour.setCity(city);
         tour.setHotelName(hotelName);
         tour.setId(2);
-        when(tourDao.updateTour(tour)).thenReturn(true);
+        when(tourDao.updateTour(any(Tour.class))).thenReturn(false);
 
         //when
         String result = addOrUpdateTourCommand.execute(request, response);
 
         //then
         assertThat(result, is("/WEB-INF/jsp/tours.jsp"));
+
+        // given
+        when(tourDao.updateTour(any(Tour.class))).thenReturn(true);
+
+        //when
+        result = addOrUpdateTourCommand.execute(request, response);
+
+        //then
+        assertThat(result, is("/controller?command=showTours"));
     }
 
     @Test(expected = AppException.class)

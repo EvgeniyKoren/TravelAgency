@@ -7,11 +7,9 @@ import ua.nure.koren.summaryTask4.db.dao.UserDao;
 import ua.nure.koren.summaryTask4.db.entity.User;
 import ua.nure.koren.summaryTask4.exception.AppException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 /**
  * Login command.
@@ -26,6 +24,8 @@ public class LoginCommand extends AbstractCommand {
 
     private static final Logger LOG = Logger.getLogger(LoginCommand.class);
 
+    private UserDao userDao = UserDao.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws AppException {
         LOG.debug("Command starts");
@@ -33,7 +33,6 @@ public class LoginCommand extends AbstractCommand {
         HttpSession session = request.getSession();
 
         // obtain login and password from a request
-        UserDao userDao = UserDao.getInstance();
         String login = request.getParameter("login");
         LOG.trace("Request parameter: login --> " + login);
 
