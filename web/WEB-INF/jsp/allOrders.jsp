@@ -39,6 +39,10 @@
                     </c:forEach>
                 </table>
             </div>
+            <div>
+                <a href="controller?command=ordersQuantity" class="btn btn-outline-primary mb-4" ><fmt:message key="orders.summ" /></a>
+            </div>
+            <div><span><fmt:message key="orders.summ.text" /> <b>${rowsNum}</b></span></div>
         </c:if>
         <c:if test="${empty allOrders}">
             <p><fmt:message key="orders.empty"/></p>

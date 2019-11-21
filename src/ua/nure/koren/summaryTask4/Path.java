@@ -21,5 +21,6 @@ public final class Path {
   // commands
   public static final String COMMAND_SHOW_USERS = "/controller?command=showUsers";
   public static final String COMMAND_SHOW_TOURS = "/controller?command=showTours";
+  public static final String COMMAND_SHOW_ORDERS = "controller?command=showOrders";
 
 }

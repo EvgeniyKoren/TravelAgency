@@ -32,7 +32,7 @@
                         <c:set var="picture" value="manager.jpg"/>
                     </c:when>
                     <c:otherwise>
-                        <c:set var="picture" value="user.jpg"/>
+                        <c:set var="picture" value="user.png"/>
                     </c:otherwise>
                 </c:choose>
                 <img src="${pageContext.request.contextPath}/static/img/${picture}" style="width:100%;">

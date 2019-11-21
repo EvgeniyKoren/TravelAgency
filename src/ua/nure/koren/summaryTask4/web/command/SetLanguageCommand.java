@@ -32,9 +32,11 @@ public class SetLanguageCommand extends AbstractCommand {
         Role userRole = null;
 
         if (sessionLocale != null && !sessionLocale.isEmpty()) {
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
             userRole = (Role) session.getAttribute("userRole");
-            LOG.trace("Get the session attribute: userRole --> " + userRole.getName());
+            if (userRole != null) {
+                LOG.trace("Get the session attribute: userRole --> " + userRole.getName());
+            }
             session.setAttribute("lang", sessionLocale);
             LOG.trace("Set the session attribute: lang --> " + sessionLocale);
         }

@@ -26,6 +26,7 @@ public class OrderDao extends AbstractDao {
 
     private static final String SQL_INSERT_ORDER = "INSERT INTO orders VALUE(DEFAULT, ?, ?, false)";
     private static final String SQL_FIND_ALL_ORDERS = "SELECT * FROM orders";
+    private static final String SQL_FIND_ORDERS_SUMM = "SELECT COUNT(*) FROM orders";
 
     private static final Logger LOG = Logger.getLogger(OrderDao.class);
 
@@ -34,7 +35,8 @@ public class OrderDao extends AbstractDao {
     /**
      * Don't let anyone else instantiate this class
      */
-    private OrderDao() {}
+    private OrderDao() {
+    }
 
     /**
      * Returns the OrderDao object associated with the current Java application
@@ -55,7 +57,7 @@ public class OrderDao extends AbstractDao {
      * @param userId User id which makes an order
      * @param tourId Tour id which ordered by user
      * @return boolean
-     *                true if operation succeeded
+     * true if operation succeeded
      * @throws DBException
      */
     public boolean insertOrder(int userId, int tourId) throws DBException {
@@ -76,7 +78,7 @@ public class OrderDao extends AbstractDao {
             close(preparedStatement);
             close(connection);
         }
-        return  rowsNum > 0;
+        return rowsNum > 0;
     }
 
     /**
@@ -103,6 +105,25 @@ public class OrderDao extends AbstractDao {
         }
         LOG.trace("Orders are obtained --> " + orders);
         return orders;
+    }
+
+    public int getOrdersQuantity() throws DBException {
+        int result = 0;
+        Connection connection = DBManager.getConnection();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(SQL_FIND_ORDERS_SUMM);
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new DBException(Messages.ERR_CANNOT_OBTAIN_SUM_ORDERS, e);
+        } finally {
+            close(connection, statement, resultSet);
+        }
+        return result;
     }
 
     /**

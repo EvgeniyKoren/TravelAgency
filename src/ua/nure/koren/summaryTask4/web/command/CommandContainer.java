@@ -36,6 +36,7 @@ public final class CommandContainer {
 		commands.put("showUsers", new ShowUsersCommand());
         commands.put("addOrUpdateTour", new AddOrUpdateTourCommand());
         commands.put("deleteTour", new DeleteTourCommand());
+        commands.put("ordersQuantity", new GetOrdersQuantityCommand());
 
 		// manager & admin commands
         commands.put("changeTour", new ChangeTourCommand());

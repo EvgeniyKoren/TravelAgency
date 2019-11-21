@@ -31,7 +31,7 @@ public class TourDao extends AbstractDao {
     private static final String SQL_UPDATE_LAST_MINUTE = "UPDATE tours SET last_minute=? WHERE id=?";
     private static final String SQL_UPDATE_TOUR_TYPE = "UPDATE tours SET status=? WHERE id=?";
     private static final String SQL_UPDATE_TOUR_SALE = "UPDATE tours SET sale=? WHERE id=?";
-    private static final String SQL_INSERT_NEW_TOUR = "INSERT INTO tours VALUE(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_INSERT_NEW_TOUR = "INSERT INTO tours VALUE(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE_TOUR = "DELETE FROM tours WHERE id=?";
     private static final String SQL_UPDATE_TOUR = "UPDATE tours SET ";
 
@@ -360,7 +360,7 @@ public class TourDao extends AbstractDao {
     private void populateStatementByTour(PreparedStatement preparedStatement, Tour tour) throws SQLException {
         int n = 1;
         if (tour.getCountry() != null) {
-            preparedStatement.setString(n++, tour.getType());
+            preparedStatement.setString(n++, tour.getCountry());
         }
         if (tour.getCity() != null) {
             preparedStatement.setString(n++, tour.getCity());

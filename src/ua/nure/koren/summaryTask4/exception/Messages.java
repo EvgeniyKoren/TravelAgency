@@ -8,9 +8,12 @@ package ua.nure.koren.summaryTask4.exception;
  */
 public class Messages {
 
-	private Messages() {
+
+    private Messages() {
 	}
-	
+
+    public static final String ERR_CANNOT_OBTAIN_SUM_ORDERS = "Cannot obtain rows number";
+
 	public static final String ERR_CANNOT_OBTAIN_CONNECTION = "Cannot obtain a connection from the pool";
 
 	public static final String ERR_CANNOT_OBTAIN_USERS = "Cannot obtain users";
